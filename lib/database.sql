@@ -188,31 +188,31 @@ CREATE TABLE IF NOT EXISTS auth_sessions (
 );
 
 -- Create indexes for better performance
-CREATE INDEX idx_users_email ON users(email);
-CREATE INDEX idx_users_role ON users(role);
-CREATE INDEX idx_expert_profiles_user_id ON expert_profiles(user_id);
-CREATE INDEX idx_expert_profiles_specialization ON expert_profiles(specialization);
-CREATE INDEX idx_expert_profiles_rating ON expert_profiles(rating DESC);
-CREATE INDEX idx_data_records_user_id ON data_records(user_id);
-CREATE INDEX idx_data_records_types ON data_records(types);
-CREATE INDEX idx_data_records_status ON data_records(status);
-CREATE INDEX idx_data_records_is_public ON data_records(is_public);
-CREATE INDEX idx_data_records_created_at ON data_records(created_at DESC);
-CREATE INDEX idx_consultation_sessions_user_id ON consultation_sessions(user_id);
-CREATE INDEX idx_consultation_sessions_expert_id ON consultation_sessions(expert_id);
-CREATE INDEX idx_consultation_sessions_status ON consultation_sessions(status);
-CREATE INDEX idx_consultation_sessions_date ON consultation_sessions(session_date);
-CREATE INDEX idx_notifications_user_id ON notifications(user_id);
-CREATE INDEX idx_notifications_is_read ON notifications(is_read);
-CREATE INDEX idx_wallet_transactions_user_id ON wallet_transactions(user_id);
-CREATE INDEX idx_forum_questions_category ON forum_questions(category);
-CREATE INDEX idx_forum_questions_status ON forum_questions(status);
-CREATE INDEX idx_forum_answers_question_id ON forum_answers(question_id);
-CREATE INDEX idx_reviews_expert_id ON reviews(expert_id);
-CREATE INDEX idx_reminders_user_id ON reminders(user_id);
-CREATE INDEX idx_reminders_date ON reminders(reminder_date);
-CREATE INDEX idx_auth_sessions_token ON auth_sessions(session_token);
-CREATE INDEX idx_auth_sessions_expires ON auth_sessions(expires_at);
+CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
+CREATE INDEX IF NOT EXISTS idx_users_role ON users(role);
+CREATE INDEX IF NOT EXISTS idx_expert_profiles_user_id ON expert_profiles(user_id);
+CREATE INDEX IF NOT EXISTS idx_expert_profiles_specialization ON expert_profiles(specialization);
+CREATE INDEX IF NOT EXISTS idx_expert_profiles_rating ON expert_profiles(rating DESC);
+CREATE INDEX IF NOT EXISTS idx_data_records_user_id ON data_records(user_id);
+CREATE INDEX IF NOT EXISTS idx_data_records_types ON data_records(types);
+CREATE INDEX IF NOT EXISTS idx_data_records_status ON data_records(status);
+CREATE INDEX IF NOT EXISTS idx_data_records_is_public ON data_records(is_public);
+CREATE INDEX IF NOT EXISTS idx_data_records_created_at ON data_records(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_consultation_sessions_user_id ON consultation_sessions(user_id);
+CREATE INDEX IF NOT EXISTS idx_consultation_sessions_expert_id ON consultation_sessions(expert_id);
+CREATE INDEX IF NOT EXISTS idx_consultation_sessions_status ON consultation_sessions(status);
+CREATE INDEX IF NOT EXISTS idx_consultation_sessions_date ON consultation_sessions(session_date);
+CREATE INDEX IF NOT EXISTS idx_notifications_user_id ON notifications(user_id);
+CREATE INDEX IF NOT EXISTS idx_notifications_is_read ON notifications(is_read);
+CREATE INDEX IF NOT EXISTS idx_wallet_transactions_user_id ON wallet_transactions(user_id);
+CREATE INDEX IF NOT EXISTS idx_forum_questions_category ON forum_questions(category);
+CREATE INDEX IF NOT EXISTS idx_forum_questions_status ON forum_questions(status);
+CREATE INDEX IF NOT EXISTS idx_forum_answers_question_id ON forum_answers(question_id);
+CREATE INDEX IF NOT EXISTS idx_reviews_expert_id ON reviews(expert_id);
+CREATE INDEX IF NOT EXISTS idx_reminders_user_id ON reminders(user_id);
+CREATE INDEX IF NOT EXISTS idx_reminders_date ON reminders(reminder_date);
+CREATE INDEX IF NOT EXISTS idx_auth_sessions_token ON auth_sessions(session_token);
+CREATE INDEX IF NOT EXISTS idx_auth_sessions_expires ON auth_sessions(expires_at);
 
 -- Advanced Features Tables
 
@@ -347,22 +347,22 @@ CREATE TABLE IF NOT EXISTS platform_settings (
 ALTER TABLE users ADD COLUMN IF NOT EXISTS status VARCHAR(20) DEFAULT 'active';
 
 -- Create indexes for new tables
-CREATE INDEX idx_favorite_experts_user ON favorite_experts(user_id);
-CREATE INDEX idx_favorite_experts_expert ON favorite_experts(expert_id);
-CREATE INDEX idx_expert_availability_expert ON expert_availability(expert_id);
-CREATE INDEX idx_expert_availability_day ON expert_availability(day_of_week);
-CREATE INDEX idx_session_documents_session ON session_documents(session_id);
-CREATE INDEX idx_session_documents_uploader ON session_documents(uploaded_by);
-CREATE INDEX idx_session_templates_expert ON session_templates(expert_id);
-CREATE INDEX idx_expert_certifications_expert ON expert_certifications(expert_id);
-CREATE INDEX idx_expert_certifications_status ON expert_certifications(verification_status);
-CREATE INDEX idx_disputes_user ON disputes(user_id);
-CREATE INDEX idx_disputes_status ON disputes(status);
-CREATE INDEX idx_system_logs_user ON system_logs(user_id);
-CREATE INDEX idx_system_logs_action ON system_logs(action);
-CREATE INDEX idx_system_logs_created ON system_logs(created_at DESC);
-CREATE INDEX idx_content_reports_status ON content_reports(status);
-CREATE INDEX idx_content_reports_type ON content_reports(content_type, content_id);
+CREATE INDEX IF NOT EXISTS idx_favorite_experts_user ON favorite_experts(user_id);
+CREATE INDEX IF NOT EXISTS idx_favorite_experts_expert ON favorite_experts(expert_id);
+CREATE INDEX IF NOT EXISTS idx_expert_availability_expert ON expert_availability(expert_id);
+CREATE INDEX IF NOT EXISTS idx_expert_availability_day ON expert_availability(day_of_week);
+CREATE INDEX IF NOT EXISTS idx_session_documents_session ON session_documents(session_id);
+CREATE INDEX IF NOT EXISTS idx_session_documents_uploader ON session_documents(uploaded_by);
+CREATE INDEX IF NOT EXISTS idx_session_templates_expert ON session_templates(expert_id);
+CREATE INDEX IF NOT EXISTS idx_expert_certifications_expert ON expert_certifications(expert_id);
+CREATE INDEX IF NOT EXISTS idx_expert_certifications_status ON expert_certifications(verification_status);
+CREATE INDEX IF NOT EXISTS idx_disputes_user ON disputes(user_id);
+CREATE INDEX IF NOT EXISTS idx_disputes_status ON disputes(status);
+CREATE INDEX IF NOT EXISTS idx_system_logs_user ON system_logs(user_id);
+CREATE INDEX IF NOT EXISTS idx_system_logs_action ON system_logs(action);
+CREATE INDEX IF NOT EXISTS idx_system_logs_created ON system_logs(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_content_reports_status ON content_reports(status);
+CREATE INDEX IF NOT EXISTS idx_content_reports_type ON content_reports(content_type, content_id);
 
 -- Insert default platform settings
 INSERT INTO platform_settings (setting_key, setting_value) 
