@@ -389,24 +389,68 @@
             .navbar-container {
                 flex-wrap: wrap;
                 height: auto;
-                padding: 16px 20px;
-                gap: 16px;
+                padding: 12px 16px;
+                gap: 12px;
+            }
+            .logo {
+                font-size: 18px;
+            }
+            .logo i {
+                font-size: 20px;
             }
             .nav-right {
                 width: 100%;
                 justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .btn {
+                font-size: 13px;
+                padding: 8px 14px;
             }
             .welcome-section {
-                padding: 24px;
+                padding: 20px 16px;
             }
             .welcome-section h1 {
                 font-size: 24px;
             }
+            .welcome-section p {
+                font-size: 14px;
+            }
+            .section {
+                padding: 20px 16px;
+            }
+            .section-header {
+                margin-bottom: 16px;
+            }
+            .section-header h2 {
+                font-size: 21px;
+            }
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            .stat-card {
+                padding: 16px;
+            }
+            .stat-info h3 {
+                font-size: 24px;
+            }
+            .stat-info p {
+                font-size: 12px;
             }
             .quick-actions {
                 grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            .action-card {
+                padding: 16px;
+            }
+            .action-card h3 {
+                font-size: 16px;
+            }
+            .action-card p {
+                font-size: 13px;
             }
             .bottom-nav {
                 display: block;

@@ -13,36 +13,340 @@ if ($user['role'] !== 'expert' && $user['role'] !== 'admin') {
     <title>Expert Dashboard - Law Connectors</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {margin: 0; padding: 0; box-sizing: border-box;}
-        body {font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px;}
-        .container {max-width: 1400px; margin: 0 auto;}
-        .header {background: white; padding: 20px 30px; border-radius: 15px; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;}
-        .logo {font-size: 24px; font-weight: bold; color: #667eea; display: flex; align-items: center; gap: 10px;}
-        .nav-buttons {display: flex; gap: 10px; flex-wrap: wrap;}
-        .btn {padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600; transition: all 0.3s; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;}
-        .btn-primary {background: #667eea; color: white;}
-        .btn-secondary {background: #f0f0f0; color: #333;}
-        .btn-success {background: #28a745; color: white;}
-        .btn-danger {background: #dc3545; color: white;}
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap');
         
-        .content-box {background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 25px;}
-        .session-card {background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid #667eea;}
-        .session-header {display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;}
-        .session-details {display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px;}
-        .detail-item {display: flex; align-items: center; gap: 10px; color: #666;}
-        .badge {padding: 5px 12px; border-radius: 15px; font-size: 12px; font-weight: 600;}
-        .badge-warning {background: #fff3cd; color: #856404;}
-        .badge-success {background: #d4edda; color: #155724;}
-        .badge-danger {background: #f8d7da; color: #721c24;}
-        .badge-info {background: #d1ecf1; color: #0c5460;}
-        .session-actions {display: flex; gap: 10px; margin-top: 15px;}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         
-        .profile-form {max-width: 600px;}
-        .form-group {margin-bottom: 20px;}
-        .form-group label {display: block; margin-bottom: 8px; font-weight: 600; color: #333;}
-        .form-group input, .form-group select, .form-group textarea {width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 14px;}
-        .checkbox-group {display: flex; align-items: center; gap: 10px;}
-        .checkbox-group input[type="checkbox"] {width: auto;}
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fafafa;
+            color: #0a0a0a;
+            min-height: 100vh;
+            padding-bottom: 90px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        
+        .header {
+            background: #0a0a0a;
+            padding: 24px 40px;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .logo {
+            font-size: 26px;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo i {
+            font-size: 28px;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary {
+            background: #0a0a0a;
+            color: #fff;
+            border: 2px solid #0a0a0a;
+        }
+        
+        .btn-primary:hover {
+            background: #fff;
+            color: #0a0a0a;
+        }
+        
+        .btn-secondary {
+            background: #fff;
+            color: #0a0a0a;
+            border: 2px solid #ddd;
+        }
+        
+        .btn-secondary:hover {
+            background: #0a0a0a;
+            color: #fff;
+            border-color: #0a0a0a;
+        }
+        
+        .btn-success {
+            background: #0a0a0a;
+            color: #fff;
+            border: 2px solid #0a0a0a;
+        }
+        
+        .btn-success:hover {
+            background: #2ecc71;
+            border-color: #2ecc71;
+        }
+        
+        .btn-danger {
+            background: #fff;
+            color: #e74c3c;
+            border: 2px solid #e74c3c;
+        }
+        
+        .btn-danger:hover {
+            background: #e74c3c;
+            color: #fff;
+        }
+        
+        .content-box {
+            background: #fff;
+            padding: 32px;
+            margin-bottom: 32px;
+            border: 1px solid #e8e8e4;
+        }
+        
+        .content-box h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            color: #0a0a0a;
+            margin-bottom: 24px;
+        }
+        
+        .session-card {
+            background: #fafafa;
+            padding: 24px;
+            margin-bottom: 20px;
+            border-left: 4px solid #0a0a0a;
+            transition: all 0.3s ease;
+        }
+        
+        .session-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        
+        .session-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            gap: 16px;
+        }
+        
+        .session-header h3 {
+            font-size: 19px;
+            color: #0a0a0a;
+            font-weight: 600;
+        }
+        
+        .session-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+        
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .detail-item i {
+            color: #0a0a0a;
+        }
+        
+        .badge {
+            padding: 6px 14px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .badge-warning {
+            background: #fff;
+            color: #f39c12;
+            border: 1px solid #f39c12;
+        }
+        
+        .badge-success {
+            background: #fff;
+            color: #2ecc71;
+            border: 1px solid #2ecc71;
+        }
+        
+        .badge-danger {
+            background: #fff;
+            color: #e74c3c;
+            border: 1px solid #e74c3c;
+        }
+        
+        .badge-info {
+            background: #0a0a0a;
+            color: #fff;
+            border: 1px solid #0a0a0a;
+        }
+        
+        .session-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .profile-form {
+            max-width: 600px;
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #0a0a0a;
+            font-size: 14px;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #0a0a0a;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 16px;
+            }
+            
+            .header {
+                padding: 16px 20px;
+                margin-bottom: 24px;
+            }
+            
+            .logo {
+                font-size: 20px;
+            }
+            
+            .logo i {
+                font-size: 22px;
+            }
+            
+            .nav-buttons {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            
+            .btn {
+                font-size: 13px;
+                padding: 10px 16px;
+            }
+            
+            .content-box {
+                padding: 20px 16px;
+                margin-bottom: 20px;
+            }
+            
+            .content-box h2 {
+                font-size: 22px;
+            }
+            
+            .session-card {
+                padding: 16px;
+            }
+            
+            .session-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            
+            .session-header h3 {
+                font-size: 16px;
+            }
+            
+            .session-details {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .session-actions {
+                flex-direction: column;
+            }
+            
+            .session-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 <body>

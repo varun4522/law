@@ -43,6 +43,40 @@
         .badge-info {background: #f0f0f0; color: #0a0a0a;}
         
         @media (max-width: 768px) {
+            .navbar-container {
+                padding: 12px 16px;
+                height: auto;
+            }
+            .logo {
+                font-size: 18px;
+            }
+            .nav-links {
+                display: none;
+            }
+            .container {
+                padding: 20px 16px;
+            }
+            .page-header h1 {
+                font-size: 26px;
+            }
+            .page-header p {
+                font-size: 14px;
+            }
+            .session-card {
+                padding: 16px;
+            }
+            .session-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            .session-info h3 {
+                font-size: 16px;
+            }
+            .session-details {
+                flex-direction: column;
+                gap: 8px;
+            }
             .navbar-container {flex-wrap: wrap; height: auto; padding: 16px 20px; gap: 12px;}
             .nav-buttons {width: 100%;}
             .session-details {grid-template-columns: 1fr;}
@@ -134,5 +168,7 @@
 
         window.addEventListener('load', loadSessions);
     </script>
+
+    <?php include 'includes/bottom_nav.php'; ?>
 </body>
 </html>

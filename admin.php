@@ -67,8 +67,66 @@ if ($user['role'] !== 'admin') {
         select.role-select:focus {outline: none; border-color: #0a0a0a;}
         
         @media (max-width: 768px) {
-            .stats-grid {grid-template-columns: repeat(2, 1fr);}
-            .page-header h1 {font-size: 32px;}
+            .navbar {
+                padding: 12px 16px;
+            }
+            .logo {
+                font-size: 16px;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .nav-links a {
+                font-size: 13px;
+                padding: 6px 12px;
+            }
+            .container {
+                padding: 20px 16px;
+            }
+            .page-header {
+                margin-bottom: 24px;
+            }
+            .page-header h1 {
+                font-size: 26px;
+            }
+            .page-header p {
+                font-size: 14px;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            .stat-card {
+                padding: 16px;
+            }
+            .stat-value {
+                font-size: 24px;
+            }
+            .stat-label {
+                font-size: 12px;
+            }
+            .section-card {
+                padding: 20px 16px;
+            }
+            .section-card h2 {
+                font-size: 18px;
+            }
+            .table-container {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            table {
+                font-size: 13px;
+            }
+            th, td {
+                padding: 10px 8px;
+                white-space: nowrap;
+            }
+            .btn {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
         }
     </style>
 </head>

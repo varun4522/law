@@ -94,6 +94,44 @@
         .status-failed {background: #f8d7da; color: #721c24;}
         
         @media (max-width: 768px) {
+            .navbar-container {
+                padding: 12px 16px;
+            }
+            .logo {
+                font-size: 18px;
+            }
+            .nav-links {
+                display: none;
+            }
+            .container {
+                padding: 20px 16px;
+            }
+            .page-header h1 {
+                font-size: 26px;
+            }
+            .wallet-card {
+                padding: 24px 20px;
+            }
+            .balance-amount {
+                font-size: 32px;
+            }
+            .modal-content {
+                padding: 24px 20px;
+                margin: 0 16px;
+            }
+            .modal-header h2 {
+                font-size: 22px;
+            }
+            .paytm-number {
+                font-size: 18px;
+                padding: 12px 16px;
+            }
+            .btn-group {
+                flex-direction: column;
+            }
+            .btn-group .btn {
+                width: 100%;
+            }
             .page-header h1 {font-size: 32px;}
             .wallet-card {padding: 25px;}
             .wallet-card .balance-amount {font-size: 36px;}
@@ -385,5 +423,7 @@
             }
         });
     </script>
+
+    <?php include 'includes/bottom_nav.php'; ?>
 </body>
 </html>

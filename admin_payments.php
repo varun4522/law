@@ -87,8 +87,95 @@ if ($user['role'] !== 'admin') {
         .btn-group {display: flex; gap: 10px; margin-top: 25px;}
         
         @media (max-width: 1200px) {
-            .payment-row {grid-template-columns: 1fr; gap: 10px;}
-            .action-buttons {flex-direction: row;}
+            .payment-row {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .action-buttons {
+                flex-direction: row;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 12px 16px;
+            }
+            .logo {
+                font-size: 16px;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .nav-links a {
+                font-size: 12px;
+                padding: 6px 10px;
+            }
+            .container {
+                padding: 20px 16px;
+            }
+            .page-header h1 {
+                font-size: 24px;
+            }
+            .page-header p {
+                font-size: 13px;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            .stat-card {
+                padding: 16px;
+            }
+            .stat-value {
+                font-size: 24px;
+            }
+            .stat-label {
+                font-size: 11px;
+            }
+            .section-card {
+                padding: 20px 16px;
+            }
+            .section-card h2 {
+                font-size: 18px;
+            }
+            .filter-tabs {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            .filter-tab {
+                font-size: 13px;
+                padding: 8px 16px;
+                white-space: nowrap;
+            }
+            .payment-row {
+                padding: 16px;
+            }
+            .payment-info h4 {
+                font-size: 14px;
+            }
+            .payment-detail {
+                font-size: 12px;
+            }
+            .action-buttons {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .btn {
+                font-size: 12px;
+                padding: 8px 12px;
+            }
+            .modal-content {
+                padding: 20px 16px;
+                margin: 0 16px;
+            }
+            .modal-header h3 {
+                font-size: 20px;
+            }
+            .info-group label {
+                font-size: 12px;
+            }
         }
     </style>
 </head>

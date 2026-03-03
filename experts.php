@@ -335,17 +335,59 @@
             .navbar-container {
                 flex-wrap: wrap;
                 height: auto;
-                padding: 16px 20px;
+                padding: 12px 16px;
                 gap: 12px;
+            }
+            .logo {
+                font-size: 18px;
+            }
+            .logo i {
+                font-size: 20px;
             }
             .nav-right {
                 width: 100%;
+                flex-wrap: wrap;
+            }
+            .btn {
+                font-size: 13px;
+                padding: 8px 14px;
+            }
+            .container {
+                padding: 20px 16px;
+            }
+            .page-header {
+                margin-bottom: 24px;
             }
             .page-header h1 {
-                font-size: 28px;
+                font-size: 26px;
+            }
+            .page-header p {
+                font-size: 14px;
+            }
+            .search-filter-section {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .search-bar {
+                width: 100%;
+            }
+            .filter-group {
+                width: 100%;
             }
             .experts-grid {
                 grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            .expert-card {
+                padding: 20px;
+            }
+            .expert-info h3 {
+                font-size: 18px;
+            }
+            .expert-meta {
+                flex-direction: column;
+                gap: 8px;
+                align-items: flex-start;
             }
         }
     </style>
@@ -740,5 +782,7 @@
         // Load experts on page load
         window.addEventListener('load', loadExperts);
     </script>
+
+    <?php include 'includes/bottom_nav.php'; ?>
 </body>
 </html>

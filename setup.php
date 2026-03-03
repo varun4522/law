@@ -196,17 +196,93 @@ try {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Law Connectors - Setup</title>
     <style>
-        body { font-family: Arial, sans-serif; max-width: 700px; margin: 60px auto; padding: 20px; background: #f5f5f5; }
-        .card { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,.1); }
-        h1 { color: #667eea; margin-bottom: 5px; }
-        h2 { margin: 20px 0 10px; color: #333; font-size: 16px; }
-        .ok  { color: #155724; background: #d4edda; padding: 8px 14px; border-radius: 5px; margin: 5px 0; }
-        .err { color: #721c24; background: #f8d7da; padding: 8px 14px; border-radius: 5px; margin: 5px 0; }
-        a.btn { display: inline-block; margin-top: 20px; padding: 12px 25px; background: #667eea; color: white; border-radius: 6px; text-decoration: none; font-weight: bold; }
-        a.btn:hover { background: #5a6fd6; }
-        .note { background: #fff3cd; padding: 10px 14px; border-radius: 5px; margin-top: 15px; font-size: 13px; color: #856404; }
+        body { 
+            font-family: Arial, sans-serif; 
+            max-width: 700px; 
+            margin: 60px auto; 
+            padding: 20px; 
+            background: #f5f5f5; 
+        }
+        .card { 
+            background: white; 
+            padding: 30px; 
+            border-radius: 10px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,.1); 
+        }
+        h1 { 
+            color: #667eea; 
+            margin-bottom: 5px; 
+        }
+        h2 { 
+            margin: 20px 0 10px; 
+            color: #333; 
+            font-size: 16px; 
+        }
+        .ok  { 
+            color: #155724; 
+            background: #d4edda; 
+            padding: 8px 14px; 
+            border-radius: 5px; 
+            margin: 5px 0; 
+        }
+        .err { 
+            color: #721c24; 
+            background: #f8d7da; 
+            padding: 8px 14px; 
+            border-radius: 5px; 
+            margin: 5px 0; 
+        }
+        a.btn { 
+            display: inline-block; 
+            margin-top: 20px; 
+            padding: 12px 25px; 
+            background: #667eea; 
+            color: white; 
+            border-radius: 6px; 
+            text-decoration: none; 
+            font-weight: bold; 
+        }
+        a.btn:hover { 
+            background: #5a6fd6; 
+        }
+        .note { 
+            background: #fff3cd; 
+            padding: 10px 14px; 
+            border-radius: 5px; 
+            margin-top: 15px; 
+            font-size: 13px; 
+            color: #856404; 
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                margin: 20px auto;
+                padding: 16px;
+            }
+            .card {
+                padding: 20px 16px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            h2 {
+                font-size: 15px;
+            }
+            .ok, .err {
+                font-size: 13px;
+                padding: 8px 12px;
+            }
+            a.btn {
+                width: 100%;
+                text-align: center;
+            }
+            .note {
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
 <body>

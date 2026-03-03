@@ -69,10 +69,69 @@
         .sample-btn:hover {background: #0a0a0a; color: #fff; border-color: #0a0a0a;}
         
         @media (max-width: 768px) {
-            .chat-container {height: calc(100vh - 140px); min-height: 500px;}
-            .message-content {max-width: 85%;}
-            .welcome-message {padding: 40px 20px;}
-            .welcome-message i {font-size: 56px;}
+            .navbar-container {
+                padding: 12px 16px;
+            }
+            .logo {
+                font-size: 18px;
+            }
+            .nav-links {
+                display: none;
+            }
+            .container {
+                padding: 20px 16px;
+            }
+            .chat-container {
+                height: calc(100vh - 160px);
+                min-height: 500px;
+            }
+            .chat-header {
+                padding: 20px 20px;
+            }
+            .chat-header h2 {
+                font-size: 20px;
+            }
+            .chat-header p {
+                font-size: 12px;
+            }
+            .chat-messages {
+                padding: 20px 16px;
+            }
+            .message-content {
+                max-width: 85%;
+            }
+            .message-avatar {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+            .welcome-message {
+                padding: 30px 20px;
+            }
+            .welcome-message i {
+                font-size: 56px;
+            }
+            .welcome-message h3 {
+                font-size: 22px;
+            }
+            .sample-questions {
+                gap: 8px;
+            }
+            .sample-btn {
+                font-size: 12px;
+                padding: 8px 14px;
+            }
+            .chat-input {
+                padding: 16px 16px;
+                flex-direction: column;
+            }
+            .chat-input textarea {
+                font-size: 14px;
+            }
+            .chat-input button {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -241,5 +300,7 @@
             sendMessage();
         }
     </script>
+
+    <?php include 'includes/bottom_nav.php'; ?>
 </body>
 </html>

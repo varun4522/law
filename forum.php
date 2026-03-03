@@ -63,6 +63,51 @@
         hr {border: none; border-top: 1px solid #e8e8e4; margin: 30px 0;}
         
         @media (max-width: 768px) {
+            .navbar-container {
+                padding: 12px 16px;
+            }
+            .logo {
+                font-size: 18px;
+            }
+            .nav-links {
+                display: none;
+            }
+            .container {
+                padding: 20px 16px;
+            }
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+            .page-header-text h1 {
+                font-size: 26px;
+            }
+            .page-header-text p {
+                font-size: 14px;
+            }
+            .question-card {
+                padding: 16px;
+            }
+            .question-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            .question-title {
+                font-size: 17px;
+            }
+            .question-meta {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+            .modal-content {
+                padding: 24px 20px;
+                margin: 0 16px;
+            }
+            .modal-header h2 {
+                font-size: 22px;
+            }
             .page-header {flex-direction: column;}
             .page-header-text h1 {font-size: 32px;}
             .nav-container {flex-direction: column; align-items: stretch;}
@@ -278,5 +323,7 @@
 
         window.addEventListener('load', loadQuestions);
     </script>
+
+    <?php include 'includes/bottom_nav.php'; ?>
 </body>
 </html>
