@@ -72,6 +72,12 @@ try {
     
     $userId = $pdo->lastInsertId();
     
+    // Create expert profile row if role is expert
+    if ($role === 'expert') {
+        $pdo->prepare("INSERT INTO expert_profiles (user_id, verification_status, availability_status) VALUES (?, 'pending', 'available')")
+            ->execute([$userId]);
+    }
+    
     sendSuccessResponse([
         'user' => [
             'id' => $userId,

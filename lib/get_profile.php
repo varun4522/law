@@ -16,13 +16,16 @@ if (!$user) {
 
 try {
     // Get user profile
-    $stmt = $pdo->prepare("SELECT id, email, full_name, role, created_at FROM users WHERE id = ?");
+    $stmt = $pdo->prepare("SELECT id, email, full_name, role, wallet_balance, phone, bio, profile_image, created_at FROM users WHERE id = ?");
     $stmt->execute([$user['id']]);
     $profile = $stmt->fetch();
     
     if (!$profile) {
         sendErrorResponse('Profile not found', 404);
     }
+    
+    // Add wallet balance to main data for convenience
+    $profile['name'] = $profile['full_name'];
     
     sendSuccessResponse($profile);
     

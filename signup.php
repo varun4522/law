@@ -1,9 +1,16 @@
+<?php
+require_once 'lib/db.php';
+if (isLoggedIn()) {
+    header('Location: mainhome.php');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up - Law Application</title>
+    <title>Sign Up - Law Connectors</title>
     <style>
         * {
             margin: 0;

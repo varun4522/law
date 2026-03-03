@@ -1,3 +1,4 @@
+<?php require_once 'lib/db.php'; requireAuth(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -110,9 +111,10 @@
                 
                 if (result.data) {
                     currentUser = result.data;
-                    document.getElementById('userName').textContent = result.data.name;
-                    document.getElementById('welcomeName').textContent = result.data.name;
-                    const initials = result.data.name.split(' ').map(n => n[0]).join('').toUpperCase();
+                    const displayName = result.data.full_name || result.data.email;
+                    document.getElementById('userName').textContent = displayName;
+                    document.getElementById('welcomeName').textContent = displayName;
+                    const initials = displayName.split(' ').map(n => n[0]).join('').toUpperCase().slice(0,2);
                     document.getElementById('userAvatar').textContent = initials;
                     
                     // Load role-specific quick actions
