@@ -5,99 +5,396 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Law Connectors</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {margin: 0; padding: 0; box-sizing: border-box;}
-        body {font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px;}
-        .container {max-width: 1400px; margin: 0 auto;}
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f8f9fa;
+            min-height: 100vh;
+            color: #1a1a1a;
+        }
         
-        /* Header */
-        .header {background: white; padding: 20px 30px; border-radius: 15px; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;}
-        .logo {font-size: 24px; font-weight: bold; color: #667eea; display: flex; align-items: center; gap: 10px;}
-        .user-section {display: flex; align-items: center; gap: 20px;}
-        .wallet-badge {background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 8px 15px; border-radius: 20px; font-weight: 600; display: flex; align-items: center; gap: 8px;}
-        .notification-bell {position: relative; font-size: 24px; color: #667eea; cursor: pointer;}
-        .notification-count {position: absolute; top: -5px; right: -5px; background: #dc3545; color: white; border-radius: 50%; width: 18px; height: 18px; font-size: 11px; display: flex; align-items: center; justify-content: center; font-weight: bold;}
-        .user-info {display: flex; align-items: center; gap: 10px;}
-        .user-avatar {width: 40px; height: 40px; border-radius: 50%; background: #667eea; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold;}
-        .logout-btn {padding: 10px 20px; background: #dc3545; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s;}
-        .logout-btn:hover {background: #c82333;}
+        /* Navigation Bar */
+        .navbar {
+            background: #fff;
+            border-bottom: 1px solid #e9ecef;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .navbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #1a1a1a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .logo i {
+            font-size: 24px;
+            color: #4f46e5;
+        }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        .wallet-badge {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 8px rgba(79,70,229,0.3);
+        }
+        .notification-icon {
+            position: relative;
+            font-size: 20px;
+            color: #6b7280;
+            cursor: pointer;
+            padding: 8px;
+            transition: color 0.2s;
+        }
+        .notification-icon:hover {color: #1a1a1a;}
+        .notification-count {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background: #ef4444;
+            color: white;
+            border-radius: 10px;
+            min-width: 18px;
+            height: 18px;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            padding: 0 5px;
+        }
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 6px 12px;
+            border-radius: 24px;
+            background: #f3f4f6;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .user-menu:hover {background: #e5e7eb;}
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .user-name {
+            font-weight: 500;
+            font-size: 14px;
+            color: #1a1a1a;
+        }
+        .logout-btn {
+            padding: 8px 16px;
+            background: #fff;
+            color: #ef4444;
+            border: 1.5px solid #ef4444;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .logout-btn:hover {
+            background: #ef4444;
+            color: white;
+        }
         
-        /* Welcome Banner */
-        .welcome-banner {background: white; padding: 30px; border-radius: 15px; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);}
-        .welcome-banner h1 {color: #333; margin-bottom: 10px;}
-        .welcome-banner p {color: #666; font-size: 16px;}
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+        
+        /* Welcome Section */
+        .welcome-section {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 32px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .welcome-section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+        .welcome-section h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            position: relative;
+        }
+        .welcome-section p {
+            font-size: 16px;
+            opacity: 0.95;
+            position: relative;
+        }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+        .stat-card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s;
+        }
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+        }
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+        .stat-label {
+            font-size: 14px;
+            color: #6b7280;
+            font-weight: 500;
+        }
+        
+        /* Section Title */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+        }
         
         /* Quick Actions Grid */
-        .quick-actions {display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px;}
-        .action-card {background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); cursor: pointer; transition: all 0.3s; text-decoration: none; display: block;}
-        .action-card:hover {transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.15);}
-        .action-icon {font-size: 48px; margin-bottom: 15px;}
-        .action-card h3 {color: #333; margin-bottom: 8px;}
-        .action-card p {color: #999; font-size: 14px;}
-        
-        /* Stats Row */
-        .stats-row {display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px;}
-        .stat-box {background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);}
-        .stat-value {font-size: 32px; font-weight: bold; color: #667eea; margin-bottom: 5px;}
-        .stat-label {color: #666; font-size: 14px;}
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+        .action-card {
+            background: white;
+            padding: 28px;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+        .action-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            transform: scaleY(0);
+            transition: transform 0.3s;
+        }
+        .action-card:hover::before {
+            transform: scaleY(1);
+        }
+        .action-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+            border-color: #4f46e5;
+        }
+        .action-icon {
+            font-size: 36px;
+            margin-bottom: 16px;
+            display: block;
+        }
+        .action-card h3 {
+            color: #1a1a1a;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .action-card p {
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.5;
+        }
         
         @media (max-width: 768px) {
-            .header {flex-direction: column; align-items: stretch;}
-            .user-section {flex-direction: column;}
-            .quick-actions {grid-template-columns: 1fr;}
-            .stats-row {grid-template-columns: repeat(2, 1fr);}
+            .navbar-container {
+                flex-wrap: wrap;
+                height: auto;
+                padding: 16px 20px;
+                gap: 16px;
+            }
+            .nav-right {
+                width: 100%;
+                justify-content: space-between;
+            }
+            .welcome-section {
+                padding: 24px;
+            }
+            .welcome-section h1 {
+                font-size: 24px;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <div class="logo"><i class="fas fa-balance-scale"></i> Law Connectors</div>
-            <div class="user-section">
-                <div class="wallet-badge"><i class="fas fa-wallet"></i> ₹<span id="walletBalance">0.00</span></div>
-                <div class="notification-bell" onclick="window.location.href='#'">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="mainhome.php" class="logo">
+                <i class="fas fa-balance-scale"></i>
+                Law Connectors
+            </a>
+            <div class="nav-right">
+                <div class="wallet-badge">
+                    <i class="fas fa-wallet"></i>
+                    ₹<span id="walletBalance">0.00</span>
+                </div>
+                <div class="notification-icon">
                     <i class="fas fa-bell"></i>
                     <span class="notification-count" id="notificationCount">0</span>
                 </div>
-                <div class="user-info">
+                <div class="user-menu">
                     <div class="user-avatar" id="userAvatar">U</div>
-                    <span id="userName">User</span>
+                    <span class="user-name" id="userName">User</span>
                 </div>
-                <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </button>
             </div>
         </div>
+    </nav>
 
-        <!-- Welcome Banner -->
-        <div class="welcome-banner">
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Welcome Section -->
+        <div class="welcome-section">
             <h1>Welcome back, <span id="welcomeName">User</span>!</h1>
             <p>Your one-stop platform for legal consultation, expert advice, and legal resources.</p>
         </div>
 
-        <!-- Quick Actions -->
-        <div id="quickActionsContainer" class="quick-actions">
-            <!-- Dynamic content loaded based on user role -->
-        </div>
-
-        <!-- Stats Row -->
-        <div class="stats-row">
-            <div class="stat-box">
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon" style="background: #eff6ff; color: #3b82f6;">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                </div>
                 <div class="stat-value" id="totalSessions">0</div>
                 <div class="stat-label">Total Sessions</div>
             </div>
-            <div class="stat-box">
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon" style="background: #f0fdf4; color: #22c55e;">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                </div>
                 <div class="stat-value" id="upcomingSessions">0</div>
                 <div class="stat-label">Upcoming Sessions</div>
             </div>
-            <div class="stat-box">
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon" style="background: #fef3c7; color: #f59e0b;">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                </div>
                 <div class="stat-value" id="forumQuestions">0</div>
                 <div class="stat-label">Forum Questions</div>
             </div>
-            <div class="stat-box">
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon" style="background: #f3e8ff; color: #a855f7;">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                </div>
                 <div class="stat-value" id="walletBalanceStat">₹0</div>
                 <div class="stat-label">Wallet Balance</div>
             </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <h2 class="section-title">Quick Actions</h2>
+        <div id="quickActionsContainer" class="quick-actions">
+            <!-- Dynamic content loaded based on user role -->
         </div>
     </div>
 
@@ -132,10 +429,12 @@
             // Admin-specific card
             if (role === 'admin') {
                 html += `
-                    <a href="admin.php" class="action-card" style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); color: white;">
-                        <div class="action-icon"><i class="fas fa-shield-alt"></i></div>
-                        <h3 style="color: white;">Admin Panel</h3>
-                        <p style="color: rgba(255,255,255,0.9);">Manage users, experts, and monitor system</p>
+                    <a href="admin.php" class="action-card">
+                        <div class="action-icon" style="color: #ef4444;">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Admin Panel</h3>
+                        <p>Manage users, experts, and monitor system performance</p>
                     </a>
                 `;
             }
@@ -143,45 +442,57 @@
             // Expert-specific card
             if (role === 'expert' || role === 'admin') {
                 html += `
-                    <a href="expert_dashboard.php" class="action-card" style="background: linear-gradient(135deg, #28a745 0%, #218838 100%); color: white;">
-                        <div class="action-icon"><i class="fas fa-user-tie"></i></div>
-                        <h3 style="color: white;">Expert Dashboard</h3>
-                        <p style="color: rgba(255,255,255,0.9);">Manage session requests and your profile</p>
+                    <a href="expert_dashboard.php" class="action-card">
+                        <div class="action-icon" style="color: #10b981;">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h3>Expert Dashboard</h3>
+                        <p>Manage session requests and update your profile</p>
                     </a>
                 `;
             }
 
             // Law AI - Available to everyone
             html += `
-                <a href="law_ai.php" class="action-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
-                    <div class="action-icon"><i class="fas fa-robot"></i></div>
-                    <h3 style="color: white;">Law AI Assistant</h3>
-                    <p style="color: rgba(255,255,255,0.9);">Get instant legal answers 24/7 from our AI</p>
+                <a href="law_ai.php" class="action-card">
+                    <div class="action-icon" style="color: #7c3aed;">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Law AI Assistant</h3>
+                    <p>Get instant legal answers 24/7 from our AI</p>
                 </a>
             `;
 
             // Common cards for all users
             html += `
                 <a href="experts.php" class="action-card">
-                    <div class="action-icon" style="color: #6610f2;"><i class="fas fa-users"></i></div>
+                    <div class="action-icon" style="color: #3b82f6;">
+                        <i class="fas fa-users"></i>
+                    </div>
                     <h3>Find Experts</h3>
                     <p>Browse verified legal experts and book consultations</p>
                 </a>
                 
                 <a href="sessions.php" class="action-card">
-                    <div class="action-icon" style="color: #28a745;"><i class="fas fa-calendar-check"></i></div>
+                    <div class="action-icon" style="color: #22c55e;">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
                     <h3>My Sessions</h3>
                     <p>View and manage your consultation bookings</p>
                 </a>
                 
                 <a href="forum.php" class="action-card">
-                    <div class="action-icon" style="color: #17a2b8;"><i class="fas fa-comments"></i></div>
+                    <div class="action-icon" style="color: #06b6d4;">
+                        <i class="fas fa-comments"></i>
+                    </div>
                     <h3>Ask a Lawyer</h3>
                     <p>Get free answers from legal experts in our community forum</p>
                 </a>
                 
                 <a href="wallet.php" class="action-card">
-                    <div class="action-icon" style="color: #ffc107;"><i class="fas fa-wallet"></i></div>
+                    <div class="action-icon" style="color: #f59e0b;">
+                        <i class="fas fa-wallet"></i>
+                    </div>
                     <h3>Wallet</h3>
                     <p>Manage your balance and view transaction history</p>
                 </a>
