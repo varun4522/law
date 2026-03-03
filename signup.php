@@ -11,6 +11,7 @@ if (isLoggedIn()) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up - Law Connectors</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -19,225 +20,442 @@ if (isLoggedIn()) {
         }
 
         body {
-            background-color: white;
-            font-family: Arial, sans-serif;
+            font-family: 'Inter', sans-serif;
             min-height: 100vh;
+            display: flex;
+            background: #fff;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        /* Left Panel - Black */
+        .left-panel {
+            flex: 1;
+            background: #0a0a0a;
+            color: #fff;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .left-panel::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            top: -100px;
+            right: -100px;
+        }
+
+        .left-panel::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            bottom: -50px;
+            left: -50px;
+        }
+
+        .brand {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 60px;
+        }
+
+        .brand h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -1px;
+        }
+
+        .brand p {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 300;
+        }
+
+        .features {
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 28px;
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            margin-right: 18px;
+            flex-shrink: 0;
+            font-size: 18px;
         }
 
-        .signup-container {
+        .feature-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .feature-content p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.5;
+        }
+
+        /* Right Panel - White */
+        .right-panel {
+            flex: 1;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: #fff;
+        }
+
+        .form-container {
+            max-width: 420px;
             width: 100%;
-            max-width: 450px;
-            padding: 40px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
         }
 
-        .signup-container h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 28px;
+        .form-header {
+            margin-bottom: 40px;
         }
 
-        .signup-container p {
-            text-align: center;
+        .form-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: #0a0a0a;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-header p {
             color: #666;
-            margin-bottom: 30px;
-            font-size: 14px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #333;
-            font-weight: bold;
-            font-size: 14px;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="password"],
-        select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 14px;
-            transition: border-color 0.3s;
-            font-family: Arial, sans-serif;
-        }
-
-        input[type="text"]:focus,
-        input[type="email"]:focus,
-        input[type="password"]:focus,
-        select:focus {
-            outline: none;
-            border-color: #007bff;
-        }
-
-        .password-requirements {
-            font-size: 12px;
-            color: #666;
-            margin-top: 5px;
-            line-height: 1.6;
-        }
-
-        .requirement {
-            margin: 3px 0;
-        }
-
-        .requirement.met {
-            color: #28a745;
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-top: 10px;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        button:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
-
-        .login-link {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 14px;
-            color: #666;
-        }
-
-        .login-link a {
-            color: #007bff;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .login-link a:hover {
-            text-decoration: underline;
+            font-size: 15px;
         }
 
         .alert {
-            padding: 12px;
-            margin-bottom: 20px;
-            border-radius: 4px;
+            padding: 14px 18px;
+            margin-bottom: 24px;
+            border-radius: 6px;
             font-size: 14px;
             display: none;
+            border-left: 3px solid;
         }
 
         .alert.success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-            display: block;
+            background-color: #f0fdf4;
+            color: #166534;
+            border-color: #22c55e;
         }
 
         .alert.error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-            display: block;
+            background-color: #fef2f2;
+            color: #991b1b;
+            border-color: #ef4444;
         }
 
         .alert.info {
-            background-color: #d1ecf1;
-            color: #0c5460;
-            border: 1px solid #bee5eb;
-            display: block;
+            background-color: #f0f9ff;
+            color: #075985;
+            border-color: #3b82f6;
         }
 
         .loading {
             display: none;
             text-align: center;
+            padding: 24px;
             color: #666;
             font-size: 14px;
         }
 
         .spinner {
             border: 2px solid #f3f3f3;
-            border-top: 2px solid #007bff;
+            border-top: 2px solid #0a0a0a;
             border-radius: 50%;
-            width: 16px;
-            height: 16px;
+            width: 20px;
+            height: 20px;
             animation: spin 1s linear infinite;
             display: inline-block;
-            margin-right: 8px;
+            margin-right: 10px;
+            vertical-align: middle;
         }
 
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #0a0a0a;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="number"] {
+            width: 100%;
+            padding: 13px 16px;
+            border: 1.5px solid #e5e5e5;
+            border-radius: 6px;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s ease;
+            background: #fff;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #0a0a0a;
+            box-shadow: 0 0 0 3px rgba(10, 10, 10, 0.05);
+        }
+
+        .password-requirements {
+            margin-top: 10px;
+            padding: 12px;
+            background: #f9fafb;
+            border-radius: 6px;
+        }
+
+        .requirement {
+            font-size: 12px;
+            color: #6b7280;
+            margin: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .requirement::before {
+            content: '○';
+            position: absolute;
+            left: 0;
+            color: #d1d5db;
+        }
+
+        .requirement.met {
+            color: #059669;
+        }
+
+        .requirement.met::before {
+            content: '✓';
+            color: #059669;
+        }
+
+        .type-helper {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 8px;
+            padding: 10px;
+            background: #f9fafb;
+            border-radius: 4px;
+            border-left: 3px solid #0a0a0a;
+        }
+
+        .type-helper strong {
+            color: #0a0a0a;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 14px;
+            background: #0a0a0a;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 8px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        button[type="submit"]:hover {
+            background: #1a1a1a;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(10, 10, 10, 0.15);
+        }
+
+        button[type="submit"]:active {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            background: #d1d5db;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 28px;
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        .login-link a {
+            color: #0a0a0a;
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.2s ease;
+        }
+
+        .login-link a:hover {
+            opacity: 0.7;
+        }
+
+        @media (max-width: 968px) {
+            .left-panel {
+                display: none;
+            }
+            
+            .right-panel {
+                flex: 1;
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .right-panel {
+                padding: 30px 20px;
+            }
+            
+            .form-header h2 {
+                font-size: 28px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="signup-container">
-        <h1>Create Account</h1>
-        <p>Join Law Application Today</p>
-
-        <div id="alertBox" class="alert"></div>
-        <div id="loading" class="loading"><span class="spinner"></span>Creating account...</div>
-
-        <form id="signupForm">
-            <div class="form-group">
-                <label for="fullName">Full Name</label>
-                <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+    <div class="container">
+        <!-- Left Panel -->
+        <div class="left-panel">
+            <div class="brand">
+                <h1>Law Connectors</h1>
+                <p>Join Our Legal Network Today</p>
             </div>
-
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required>
-            </div>
-
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Create a password" required>
-                <div class="password-requirements">
-                    <div class="requirement" id="req-length">✓ At least 8 characters</div>
-                    <div class="requirement" id="req-uppercase">✓ At least one uppercase letter</div>
-                    <div class="requirement" id="req-lowercase">✓ At least one lowercase letter</div>
-                    <div class="requirement" id="req-number">✓ At least one number</div>
+            
+            <div class="features">
+                <div class="feature-item">
+                    <div class="feature-icon">⚖️</div>
+                    <div class="feature-content">
+                        <h3>Expert Consultations</h3>
+                        <p>Connect with verified legal experts for professional advice</p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">📚</div>
+                    <div class="feature-content">
+                        <h3>Legal Resources</h3>
+                        <p>Access comprehensive legal knowledge and community support</p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">🔒</div>
+                    <div class="feature-content">
+                        <h3>Secure Platform</h3>
+                        <p>Your data and consultations are protected with enterprise security</p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-content">
+                        <h3>Instant Access</h3>
+                        <p>Book sessions, chat with AI, and get answers immediately</p>
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <div class="form-group">
-                <label for="confirmPassword">Confirm Password</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+        <!-- Right Panel -->
+        <div class="right-panel">
+            <div class="form-container">
+                <div class="form-header">
+                    <h2>Create Account</h2>
+                    <p>Start your legal journey with us</p>
+                </div>
+
+                <div id="alertBox" class="alert"></div>
+                <div id="loading" class="loading"><span class="spinner"></span>Creating your account...</div>
+
+                <form id="signupForm">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Create a strong password" required>
+                        <div class="password-requirements">
+                            <div class="requirement" id="req-length">At least 8 characters</div>
+                            <div class="requirement" id="req-uppercase">At least one uppercase letter</div>
+                            <div class="requirement" id="req-lowercase">At least one lowercase letter</div>
+                            <div class="requirement" id="req-number">At least one number</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="type">Account Type</label>
+                        <input type="number" id="type" name="type" placeholder="Enter 1, 2, or 3" min="1" max="3" required>
+                        <div class="type-helper">
+                            <strong>1</strong> = User (Client seeking legal help) · 
+                            <strong>2</strong> = Expert (Legal professional) · 
+                            <strong>3</strong> = Admin (Platform administrator)
+                        </div>
+                    </div>
+
+                    <button type="submit">Create Account</button>
+                </form>
+
+                <div class="login-link">
+                    Already have an account? <a href="index.php">Sign in</a>
+                </div>
             </div>
-
-            <div class="form-group">
-                <label for="type">Account Type</label>
-                <input type="number" id="type" name="type" placeholder="1 = User, 2 = Expert, 3 = Admin" min="1" max="3" required>
-                <p style="font-size:12px; color:#888; margin-top:6px;">Enter: <strong>1</strong> for User &nbsp;|&nbsp; <strong>2</strong> for Expert &nbsp;|&nbsp; <strong>3</strong> for Admin</p>
-            </div>
-
-            <button type="submit">Create Account</button>
-        </form>
-
-        <div class="login-link">
-            Already have an account? <a href="index.php">Login here</a>
         </div>
     </div>
 
