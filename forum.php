@@ -195,7 +195,7 @@
             };
 
             try {
-                const response = await fetch('lib/forum_post_question.php', {
+                const response = await fetch('lib/student/forum_post_question.php', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify(formData)

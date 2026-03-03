@@ -192,7 +192,7 @@
 
         async function loadWalletBalance() {
             try {
-                const response = await fetch('lib/get_wallet_balance.php');
+                const response = await fetch('lib/student/get_wallet_balance.php');
                 const result = await response.json();
                 
                 if (result.data) {
@@ -220,7 +220,7 @@
 
         async function loadStats() {
             try {
-                const response = await fetch('lib/get_my_sessions.php');
+                const response = await fetch('lib/student/get_my_sessions.php');
                 const result = await response.json();
                 
                 if (result.data) {

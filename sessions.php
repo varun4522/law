@@ -51,7 +51,7 @@
     <script>
         async function loadSessions() {
             try {
-                const response = await fetch('lib/get_my_sessions.php');
+                const response = await fetch('lib/student/get_my_sessions.php');
                 const result = await response.json();
 
                 if (result.error) throw new Error(result.error);

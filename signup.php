@@ -228,12 +228,9 @@ if (isLoggedIn()) {
             </div>
 
             <div class="form-group">
-                <label for="role">I am a</label>
-                <select id="role" name="role" required>
-                    <option value="">-- Select Role --</option>
-                    <option value="user">User</option>
-                    <option value="expert">Expert/Professional</option>
-                </select>
+                <label for="type">Account Type</label>
+                <input type="number" id="type" name="type" placeholder="1 = User, 2 = Expert, 3 = Admin" min="1" max="3" required>
+                <p style="font-size:12px; color:#888; margin-top:6px;">Enter: <strong>1</strong> for User &nbsp;|&nbsp; <strong>2</strong> for Expert &nbsp;|&nbsp; <strong>3</strong> for Admin</p>
             </div>
 
             <button type="submit">Create Account</button>
@@ -316,11 +313,16 @@ if (isLoggedIn()) {
             const email = document.getElementById('email').value.trim();
             const password = passwordInput.value;
             const confirmPassword = confirmPasswordInput.value;
-            const role = document.getElementById('role').value;
+            const type = parseInt(document.getElementById('type').value);
 
             // Validation
-            if (!fullName || !email || !password || !confirmPassword || !role) {
+            if (!fullName || !email || !password || !confirmPassword || !type) {
                 showAlert('Please fill in all fields.', 'error');
+                return;
+            }
+
+            if (![1, 2, 3].includes(type)) {
+                showAlert('Invalid account type. Enter 1, 2, or 3.', 'error');
                 return;
             }
 
@@ -363,7 +365,7 @@ if (isLoggedIn()) {
                         email: email,
                         password: password,
                         fullName: fullName,
-                        role: role
+                        type: type
                     })
                 });
 

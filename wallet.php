@@ -87,7 +87,7 @@
     <script>
         async function loadWalletBalance() {
             try {
-                const response = await fetch('lib/get_wallet_balance.php');
+                const response = await fetch('lib/student/get_wallet_balance.php');
                 const result = await response.json();
                 
                 if (result.data) {
@@ -100,7 +100,7 @@
 
         async function loadTransactions() {
             try {
-                const response = await fetch('lib/get_wallet_transactions.php');
+                const response = await fetch('lib/student/get_wallet_transactions.php');
                 const result = await response.json();
 
                 if (result.error) throw new Error(result.error);
@@ -159,7 +159,7 @@
             const amount = document.getElementById('amount').value;
 
             try {
-                const response = await fetch('lib/add_wallet_funds.php', {
+                const response = await fetch('lib/student/add_wallet_funds.php', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({amount: parseFloat(amount)})

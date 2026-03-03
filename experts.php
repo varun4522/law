@@ -427,7 +427,7 @@
 
         async function loadExperts() {
             try {
-                const response = await fetch('lib/get_all_experts.php');
+                const response = await fetch('lib/student/get_all_experts.php');
                 const result = await response.json();
 
                 if (result.error) {
@@ -554,7 +554,7 @@
             };
 
             try {
-                const response = await fetch('lib/book_session.php', {
+                const response = await fetch('lib/student/book_session.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formData)

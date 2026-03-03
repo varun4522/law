@@ -102,7 +102,7 @@ if ($user['role'] !== 'admin') {
     <script>
         async function loadStats() {
             try {
-                const response = await fetch('lib/admin_get_stats.php');
+                const response = await fetch('lib/admin/admin_get_stats.php');
                 const result = await response.json();
                 
                 if (result.data) {
@@ -120,7 +120,7 @@ if ($user['role'] !== 'admin') {
 
         async function loadUsers() {
             try {
-                const response = await fetch('lib/admin_get_all_users.php');
+                const response = await fetch('lib/admin/admin_get_all_users.php');
                 const result = await response.json();
                 
                 if (result.data) {
@@ -168,7 +168,7 @@ if ($user['role'] !== 'admin') {
             }
             
             try {
-                const response = await fetch('lib/admin_update_user_role.php', {
+                const response = await fetch('lib/admin/admin_update_user_role.php', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({user_id: userId, role: newRole})

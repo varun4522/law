@@ -116,7 +116,7 @@ if ($user['role'] !== 'expert' && $user['role'] !== 'admin') {
 
         async function loadSessions() {
             try {
-                const response = await fetch('lib/expert_get_session_requests.php');
+                const response = await fetch('lib/expert/expert_get_session_requests.php');
                 const result = await response.json();
                 
                 if (result.error) throw new Error(result.error);
@@ -184,7 +184,7 @@ if ($user['role'] !== 'expert' && $user['role'] !== 'admin') {
             if (!confirm(`Are you sure you want to ${confirmMsg} this session?`)) return;
 
             try {
-                const response = await fetch('lib/expert_update_session_status.php', {
+                const response = await fetch('lib/expert/expert_update_session_status.php', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({session_id: sessionId, status: status})
@@ -216,7 +216,7 @@ if ($user['role'] !== 'expert' && $user['role'] !== 'admin') {
             };
 
             try {
-                const response = await fetch('lib/expert_update_profile.php', {
+                const response = await fetch('lib/expert/expert_update_profile.php', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify(formData)
