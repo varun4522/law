@@ -12,15 +12,15 @@
         * {margin: 0; padding: 0; box-sizing: border-box;}
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #f8f9fa;
+            background: #fafafa;
             min-height: 100vh;
-            color: #1a1a1a;
+            color: #0a0a0a;
         }
         
         /* Navigation Bar */
         .navbar {
             background: #fff;
-            border-bottom: 1px solid #e9ecef;
+            border-bottom: 1px solid #e8e8e4;
             padding: 0;
             position: sticky;
             top: 0;
@@ -40,7 +40,7 @@
             font-family: 'Playfair Display', serif;
             font-size: 22px;
             font-weight: 700;
-            color: #1a1a1a;
+            color: #0a0a0a;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -48,7 +48,7 @@
         }
         .logo i {
             font-size: 24px;
-            color: #4f46e5;
+            color: #0a0a0a;
         }
         .nav-right {
             display: flex;
@@ -56,16 +56,16 @@
             gap: 24px;
         }
         .wallet-badge {
-            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            background: #0a0a0a;
             color: white;
             padding: 8px 16px;
-            border-radius: 20px;
+            border-radius: 2px;
             font-weight: 600;
             font-size: 14px;
             display: flex;
             align-items: center;
             gap: 6px;
-            box-shadow: 0 2px 8px rgba(79,70,229,0.3);
+            letter-spacing: 0.3px;
         }
         .notification-icon {
             position: relative;
@@ -97,17 +97,17 @@
             align-items: center;
             gap: 12px;
             padding: 6px 12px;
-            border-radius: 24px;
-            background: #f3f4f6;
+            border-radius: 2px;
+            background: #f5f5f3;
             cursor: pointer;
             transition: background 0.2s;
         }
-        .user-menu:hover {background: #e5e7eb;}
+        .user-menu:hover {background: #eaeae6;}
         .user-avatar {
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            background: #0a0a0a;
             color: white;
             display: flex;
             align-items: center;
@@ -118,14 +118,14 @@
         .user-name {
             font-weight: 500;
             font-size: 14px;
-            color: #1a1a1a;
+            color: #0a0a0a;
         }
         .logout-btn {
             padding: 8px 16px;
             background: #fff;
-            color: #ef4444;
-            border: 1.5px solid #ef4444;
-            border-radius: 8px;
+            color: #666;
+            border: 1.5px solid #ddd;
+            border-radius: 2px;
             cursor: pointer;
             font-weight: 600;
             font-size: 14px;
@@ -133,10 +133,12 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
+            letter-spacing: 0.3px;
         }
         .logout-btn:hover {
-            background: #ef4444;
+            background: #0a0a0a;
             color: white;
+            border-color: #0a0a0a;
         }
         
         /* Container */
@@ -148,8 +150,8 @@
         
         /* Welcome Section */
         .welcome-section {
-            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-            border-radius: 16px;
+            background: #0a0a0a;
+            border-radius: 4px;
             padding: 40px;
             margin-bottom: 32px;
             color: white;
@@ -163,7 +165,7 @@
             right: -50px;
             width: 200px;
             height: 200px;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.03);
             border-radius: 50%;
         }
         .welcome-section h1 {
@@ -172,10 +174,11 @@
             font-weight: 700;
             margin-bottom: 8px;
             position: relative;
+            letter-spacing: -0.5px;
         }
         .welcome-section p {
             font-size: 16px;
-            opacity: 0.95;
+            opacity: 0.9;
             position: relative;
         }
         
@@ -189,13 +192,14 @@
         .stat-card {
             background: white;
             padding: 24px;
-            border-radius: 12px;
-            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            border: 1px solid #e8e8e4;
             transition: all 0.3s;
         }
         .stat-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            border-color: #0a0a0a;
         }
         .stat-header {
             display: flex;
@@ -206,7 +210,7 @@
         .stat-icon {
             width: 48px;
             height: 48px;
-            border-radius: 12px;
+            border-radius: 2px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -215,13 +219,16 @@
         .stat-value {
             font-size: 28px;
             font-weight: 700;
-            color: #1a1a1a;
+            color: #0a0a0a;
             margin-bottom: 4px;
         }
         .stat-label {
             font-size: 14px;
-            color: #6b7280;
+            color: #888;
             font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 12px;
         }
         
         /* Section Title */
@@ -229,8 +236,9 @@
             font-family: 'Playfair Display', serif;
             font-size: 24px;
             font-weight: 700;
-            color: #1a1a1a;
+            color: #0a0a0a;
             margin-bottom: 20px;
+            letter-spacing: -0.5px;
         }
         
         /* Quick Actions Grid */
@@ -243,8 +251,8 @@
         .action-card {
             background: white;
             padding: 28px;
-            border-radius: 12px;
-            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            border: 1px solid #e8e8e4;
             cursor: pointer;
             transition: all 0.3s;
             text-decoration: none;
@@ -259,7 +267,7 @@
             left: 0;
             width: 4px;
             height: 100%;
-            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            background: #0a0a0a;
             transform: scaleY(0);
             transition: transform 0.3s;
         }
@@ -268,22 +276,23 @@
         }
         .action-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
-            border-color: #4f46e5;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            border-color: #0a0a0a;
         }
         .action-icon {
             font-size: 36px;
             margin-bottom: 16px;
             display: block;
+            color: #0a0a0a;
         }
         .action-card h3 {
-            color: #1a1a1a;
+            color: #0a0a0a;
             font-size: 18px;
             font-weight: 600;
             margin-bottom: 8px;
         }
         .action-card p {
-            color: #6b7280;
+            color: #888;
             font-size: 14px;
             line-height: 1.5;
         }
@@ -355,7 +364,7 @@
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-header">
-                    <div class="stat-icon" style="background: #eff6ff; color: #3b82f6;">
+                    <div class="stat-icon" style="background: #f5f5f3; color: #0a0a0a;">
                         <i class="fas fa-calendar-check"></i>
                     </div>
                 </div>
@@ -364,7 +373,7 @@
             </div>
             <div class="stat-card">
                 <div class="stat-header">
-                    <div class="stat-icon" style="background: #f0fdf4; color: #22c55e;">
+                    <div class="stat-icon" style="background: #f5f5f3; color: #0a0a0a;">
                         <i class="fas fa-clock"></i>
                     </div>
                 </div>
@@ -373,7 +382,7 @@
             </div>
             <div class="stat-card">
                 <div class="stat-header">
-                    <div class="stat-icon" style="background: #fef3c7; color: #f59e0b;">
+                    <div class="stat-icon" style="background: #f5f5f3; color: #0a0a0a;">
                         <i class="fas fa-comments"></i>
                     </div>
                 </div>
@@ -382,7 +391,7 @@
             </div>
             <div class="stat-card">
                 <div class="stat-header">
-                    <div class="stat-icon" style="background: #f3e8ff; color: #a855f7;">
+                    <div class="stat-icon" style="background: #f5f5f3; color: #0a0a0a;">
                         <i class="fas fa-wallet"></i>
                     </div>
                 </div>
@@ -430,7 +439,7 @@
             if (role === 'admin') {
                 html += `
                     <a href="admin.php" class="action-card">
-                        <div class="action-icon" style="color: #ef4444;">
+                        <div class="action-icon">
                             <i class="fas fa-shield-alt"></i>
                         </div>
                         <h3>Admin Panel</h3>
@@ -443,7 +452,7 @@
             if (role === 'expert' || role === 'admin') {
                 html += `
                     <a href="expert_dashboard.php" class="action-card">
-                        <div class="action-icon" style="color: #10b981;">
+                        <div class="action-icon">
                             <i class="fas fa-user-tie"></i>
                         </div>
                         <h3>Expert Dashboard</h3>
@@ -455,7 +464,7 @@
             // Law AI - Available to everyone
             html += `
                 <a href="law_ai.php" class="action-card">
-                    <div class="action-icon" style="color: #7c3aed;">
+                    <div class="action-icon">
                         <i class="fas fa-robot"></i>
                     </div>
                     <h3>Law AI Assistant</h3>
@@ -466,7 +475,7 @@
             // Common cards for all users
             html += `
                 <a href="experts.php" class="action-card">
-                    <div class="action-icon" style="color: #3b82f6;">
+                    <div class="action-icon">
                         <i class="fas fa-users"></i>
                     </div>
                     <h3>Find Experts</h3>
@@ -474,7 +483,7 @@
                 </a>
                 
                 <a href="sessions.php" class="action-card">
-                    <div class="action-icon" style="color: #22c55e;">
+                    <div class="action-icon">
                         <i class="fas fa-calendar-check"></i>
                     </div>
                     <h3>My Sessions</h3>
@@ -482,7 +491,7 @@
                 </a>
                 
                 <a href="forum.php" class="action-card">
-                    <div class="action-icon" style="color: #06b6d4;">
+                    <div class="action-icon">
                         <i class="fas fa-comments"></i>
                     </div>
                     <h3>Ask a Lawyer</h3>
@@ -490,7 +499,7 @@
                 </a>
                 
                 <a href="wallet.php" class="action-card">
-                    <div class="action-icon" style="color: #f59e0b;">
+                    <div class="action-icon">
                         <i class="fas fa-wallet"></i>
                     </div>
                     <h3>Wallet</h3>

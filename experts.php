@@ -5,199 +5,351 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Experts Directory - Law Connectors</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * {margin: 0; padding: 0; box-sizing: border-box;}
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #fafafa;
             min-height: 100vh;
-            padding: 20px;
+            color: #0a0a0a;
         }
-
-        .container {
+        
+        /* Navigation Bar */
+        .navbar {
+            background: #fff;
+            border-bottom: 1px solid #e8e8e4;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .navbar-container {
             max-width: 1400px;
             margin: 0 auto;
-        }
-
-        .header {
-            background: white;
-            padding: 20px 30px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 0 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
+            height: 70px;
         }
-
         .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #667eea;
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #0a0a0a;
             display: flex;
             align-items: center;
             gap: 10px;
+            text-decoration: none;
         }
-
-        .nav-buttons {
+        .logo i {
+            font-size: 24px;
+            color: #0a0a0a;
+        }
+        .nav-right {
             display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
         }
-
         .btn {
-            padding: 10px 20px;
+            padding: 10px 18px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             font-size: 14px;
             font-weight: 600;
-            transition: all 0.3s;
+            transition: all 0.2s;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
-
         .btn-primary {
-            background: #667eea;
+            background: #0a0a0a;
             color: white;
+            letter-spacing: 0.3px;
         }
-
         .btn-primary:hover {
-            background: #5568d3;
             transform: translateY(-2px);
+            background: #222;
         }
-
         .btn-secondary {
-            background: #f0f0f0;
-            color: #333;
+            background: #f5f5f3;
+            color: #0a0a0a;
         }
-
+        .btn-secondary:hover {
+            background: #eaeae6;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+        
+        /* Page Header */
+        .page-header {
+            margin-bottom: 32px;
+        }
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: #0a0a0a;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+        .page-header p {
+            font-size: 16px;
+            color: #888;
+        }
+        
+        /* Search & Filter */
         .search-filter {
             background: white;
-            padding: 25px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 24px;
+            border-radius: 4px;
+            border: 1px solid #e8e8e4;
+            margin-bottom: 32px;
         }
-
         .search-box {
             display: flex;
-            gap: 15px;
+            gap: 12px;
             flex-wrap: wrap;
         }
-
-        .search-box input, .search-box select {
+        .search-box input,
+        .search-box select {
             flex: 1;
             min-width: 200px;
-            padding: 12px 20px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
+            padding: 12px 16px;
+            border: 1.5px solid #ddd;
+            border-radius: 2px;
             font-size: 14px;
-            transition: border-color 0.3s;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.2s;
         }
-
-        .search-box input:focus, .search-box select:focus {
+        .search-box input:focus,
+        .search-box select:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #0a0a0a;
         }
-
+        
+        /* Experts Grid */
         .experts-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 25px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 24px;
         }
-
+        
         .expert-card {
             background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 4px;
+            padding: 24px;
+            border: 1px solid #e8e8e4;
             transition: all 0.3s;
             cursor: pointer;
         }
-
         .expert-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            border-color: #0a0a0a;
         }
-
+        
         .expert-header {
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
+            gap: 16px;
+            margin-bottom: 16px;
         }
-
         .expert-avatar {
-            width: 70px;
-            height: 70px;
+            width: 64px;
+            height: 64px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #0a0a0a;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 24px;
-            font-weight: bold;
+            font-size: 22px;
+            font-weight: 700;
+            flex-shrink: 0;
         }
-
         .expert-info h3 {
-            color: #333;
-            margin-bottom: 5px;
+            color: #0a0a0a;
             font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
         }
-
         .expert-specialization {
-            color: #667eea;
+            color: #666;
             font-size: 13px;
             font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-
+        
         .expert-stats {
-            display: flex;
-            gap: 15px;
-            margin: 15px 0;
-            padding: 15px 0;
-            border-top: 1px solid #f0f0f0;
-            border-bottom: 1px solid #f0f0f0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 16px 0;
+            padding: 16px 0;
+            border-top: 1px solid #f3f4f6;
+            border-bottom: 1px solid #f3f4f6;
         }
-
         .stat {
-            flex: 1;
             text-align: center;
         }
-
         .stat-value {
-            font-size: 20px;
-            font-weight: bold;
-            color: #667eea;
+            font-size: 18px;
+            font-weight: 700;
+            color: #0a0a0a;
+            margin-bottom: 2px;
         }
-
         .stat-label {
             font-size: 12px;
-            color: #999;
-            margin-top: 5px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-
+        
         .expert-details {
-            margin: 15px 0;
+            margin: 16px 0;
             font-size: 14px;
             color: #666;
         }
-
         .expert-details div {
-            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .expert-details i {
+            width: 18px;
+            color: #888;
+        }
+        
+        .expert-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 16px;
+        }
+        .expert-rate {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0a0a0a;
+        }
+        .expert-rate span {
+            font-size: 13px;
+            color: #888;
+            font-weight: 500;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal.active {
+            display: flex;
+        }
+        .modal-content {
+            background: white;
+            border-radius: 4px;
+            padding: 32px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .modal-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #0a0a0a;
+            letter-spacing: -0.5px;
+        }
+        .close-btn {
+            font-size: 28px;
+            cursor: pointer;
+            color: #888;
+            background: none;
+            border: none;
+            line-height: 1;
+        }
+        .close-btn:hover {
+            color: #0a0a0a;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #0a0a0a;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 12px;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1.5px solid #ddd;
+            border-radius: 2px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #0a0a0a;
+        }
+        
+        @media (max-width: 768px) {
+            .navbar-container {
+                flex-wrap: wrap;
+                height: auto;
+                padding: 16px 20px;
+                gap: 12px;
+            }
+            .nav-right {
+                width: 100%;
+            }
+            .page-header h1 {
+                font-size: 28px;
+            }
+            .experts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
             display: flex;
             align-items: center;
             gap: 8px;
@@ -334,20 +486,31 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="logo">
-                <i class="fas fa-scale-balanced"></i>
-                Law Connectors - Experts Directory
-            </div>
-            <div class="nav-buttons">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="mainhome.php" class="logo">
+                <i class="fas fa-balance-scale"></i>
+                Law Connectors
+            </a>
+            <div class="nav-right">
                 <a href="mainhome.php" class="btn btn-secondary"><i class="fas fa-home"></i> Dashboard</a>
-                <a href="sessions.php" class="btn btn-secondary"><i class="fas fa-calendar"></i> My Sessions</a>
+                <a href="sessions.php" class="btn btn-secondary"><i class="fas fa-calendar"></i> Sessions</a>
                 <a href="forum.php" class="btn btn-secondary"><i class="fas fa-comments"></i> Forum</a>
                 <a href="wallet.php" class="btn btn-secondary"><i class="fas fa-wallet"></i> Wallet</a>
             </div>
         </div>
+    </nav>
 
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>Find Legal Experts</h1>
+            <p>Browse and connect with verified legal professionals across all practice areas</p>
+        </div>
+
+        <!-- Search & Filter -->
         <div class="search-filter">
             <div class="search-box">
                 <input type="text" id="searchInput" placeholder="Search by name or expertise...">
@@ -365,11 +528,9 @@
             </div>
         </div>
 
-        <div id="expertsContainer">
-            <div class="loading">
-                <div class="spinner"></div>
-                <p>Loading experts...</p>
-            </div>
+        <!-- Experts Grid -->
+        <div id="expertsContainer" class="experts-grid">
+            <p style="text-align: center; padding: 40px; color: #6b7280; grid-column: 1 / -1;">Loading experts...</p>
         </div>
     </div>
 
@@ -378,7 +539,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2>Book Consultation</h2>
-                <span class="close-btn" onclick="closeModal()">&times;</span>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
             </div>
             <form id="bookingForm">
                 <input type="hidden" id="expertIdInput">
@@ -451,14 +612,12 @@
 
             if (!expertsToDisplay || expertsToDisplay.length === 0) {
                 container.innerHTML = `
-                    <div class="loading">
-                        <p>No experts found.</p>
-                    </div>
+                    <p style="text-align: center; padding: 40px; color: #6b7280; grid-column: 1 / -1;">No experts found matching your criteria.</p>
                 `;
                 return;
             }
 
-            let html = '<div class="experts-grid">';
+            let html = '';
 
             expertsToDisplay.forEach(expert => {
                 const initials = expert.full_name ? expert.full_name.split(' ').map(n => n[0]).join('').substring(0, 2) : 'EX';
@@ -476,8 +635,8 @@
                         </div>
                         <div class="expert-stats">
                             <div class="stat">
-                                <div class="stat-value">${expert.rating ? expert.rating.toFixed(1) : '0.0'} <i class="fas fa-star rating"></i></div>
-                                <div class="stat-label">Rating</div>
+                                <div class="stat-value">${expert.rating ? expert.rating.toFixed(1) : '0.0'}</div>
+                                <div class="stat-label"><i class="fas fa-star" style="color: #fbbf24;"></i> Rating</div>
                             </div>
                             <div class="stat">
                                 <div class="stat-value">${expert.total_reviews || 0}</div>
@@ -491,14 +650,17 @@
                         <div class="expert-details">
                             <div><i class="fas fa-briefcase"></i> ${expert.experience_years || 0} years experience</div>
                             <div><i class="fas fa-language"></i> ${expert.language || 'English'}</div>
-                            <div><i class="fas fa-dollar-sign"></i> ₹${expert.hourly_rate || 0}/hour</div>
-                            <div><span class="status-badge ${statusClass}">${statusText}</span></div>
+                        </div>
+                        <div class="expert-footer">
+                            <div class="expert-rate">₹${expert.hourly_rate || 0}<span>/hour</span></div>
+                            <button class="btn btn-primary" onclick="event.stopPropagation(); openBookingModal(${expert.id}, '${expert.full_name}', ${expert.hourly_rate})">
+                                <i class="fas fa-calendar-plus"></i> Book Now
+                            </button>
                         </div>
                     </div>
                 `;
             });
 
-            html += '</div>';
             container.innerHTML = html;
         }
 
