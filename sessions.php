@@ -5,45 +5,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Sessions - Law Connectors</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {margin: 0; padding: 0; box-sizing: border-box;}
-        body {font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px;}
-        .container {max-width: 1200px; margin: 0 auto;}
-        .header {background: white; padding: 20px 30px; border-radius: 15px; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;}
-        .logo {font-size: 24px; font-weight: bold; color: #667eea; display: flex; align-items: center; gap: 10px;}
-        .nav-buttons {display: flex; gap: 10px; flex-wrap: wrap;}
-        .btn {padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600; transition: all 0.3s; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;}
-        .btn-primary {background: #667eea; color: white;}
-        .btn-secondary {background: #f0f0f0; color: #333;}
-        .content-box {background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 25px;}
-        .session-card {background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 15px;}
-        .session-header {display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px;}
-        .session-details {display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px;}
-        .detail-item {display: flex; align-items: center; gap: 10px; color: #666;}
-        .badge {padding: 5px 12px; border-radius: 15px; font-size: 12px; font-weight: 600;}
-        .badge-warning {background: #fff3cd; color: #ffc107;}
-        .badge-success {background: #d4edda; color: #28a745;}
-        .badge-danger {background: #f8d7da; color: #dc3545;}
-        .badge-info {background: #d1ecf1; color: #17a2b8;}
-        @media (max-width: 768px) {.session-details {grid-template-columns: 1fr;}}
+        body {font-family: 'Inter', sans-serif; background: #fafafa; min-height: 100vh;}
+        
+        /* Navigation Bar */
+        .navbar {background: #fff; border-bottom: 1px solid #e8e8e4; padding: 0; position: sticky; top: 0; z-index: 100;}
+        .navbar-container {max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; height: 70px;}
+        .logo {font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: #0a0a0a; display: flex; align-items: center; gap: 10px; text-decoration: none;}
+        .logo i {font-size: 24px; color: #0a0a0a;}
+        .nav-buttons {display: flex; gap: 10px;}
+        .btn {padding: 10px 18px; border: none; border-radius: 2px; cursor: pointer; font-size: 14px; font-weight: 600; transition: all 0.2s; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; letter-spacing: 0.3px;}
+        .btn-primary {background: #0a0a0a; color: white;}
+        .btn-primary:hover {background: #222; transform: translateY(-2px);}
+        .btn-secondary {background: #f5f5f3; color: #0a0a0a;}
+        .btn-secondary:hover {background: #eaeae6;}
+        
+        .container {max-width: 1200px; margin: 0 auto; padding: 32px 24px;}
+        .page-header {margin-bottom: 32px;}
+        .page-header h1 {font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; color: #0a0a0a; margin-bottom: 8px; letter-spacing: -0.5px;}
+        .page-header p {font-size: 16px; color: #888;}
+        
+        .content-box {background: white; padding: 32px; border-radius: 4px; border: 1px solid #e8e8e4; margin-bottom: 24px;}
+        .session-card {background: #fafafa; padding: 24px; border-radius: 4px; margin-bottom: 16px; border-left: 3px solid #0a0a0a;}
+        .session-header {display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px;}
+        .session-header h3 {color: #0a0a0a; font-size: 18px; font-weight: 600;}
+        .session-details {display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 16px;}
+        .detail-item {display: flex; align-items: center; gap: 10px; color: #666; font-size: 14px;}
+        .detail-item i {color: #888;}
+        .badge {padding: 6px 12px; border-radius: 2px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;}
+        .badge-warning {background: #f5f5f3; color: #666;}
+        .badge-success {background: #f0f0f0; color: #0a0a0a;}
+        .badge-danger {background: #f0f0f0; color: #666;}
+        .badge-info {background: #f0f0f0; color: #0a0a0a;}
+        
+        @media (max-width: 768px) {
+            .navbar-container {flex-wrap: wrap; height: auto; padding: 16px 20px; gap: 12px;}
+            .nav-buttons {width: 100%;}
+            .session-details {grid-template-columns: 1fr;}
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="logo"><i class="fas fa-calendar"></i> Law Connectors - My Sessions</div>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="mainhome.php" class="logo">
+                <i class="fas fa-balance-scale"></i>
+                Law Connectors
+            </a>
             <div class="nav-buttons">
                 <a href="mainhome.php" class="btn btn-secondary"><i class="fas fa-home"></i> Dashboard</a>
-                <a href="experts.php" class="btn btn-primary"><i class="fas fa-plus"></i> Book New Session</a>
+                <a href="experts.php" class="btn btn-primary"><i class="fas fa-plus"></i> Book Session</a>
                 <a href="wallet.php" class="btn btn-secondary"><i class="fas fa-wallet"></i> Wallet</a>
             </div>
         </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>My Consultation Sessions</h1>
+            <p>View and manage all your legal consultation bookings</p>
+        </div>
 
         <div class="content-box">
-            <h2 style="margin-bottom: 20px; color: #333;">Your Consultation Sessions</h2>
             <div id="sessionsContainer">
-                <p style="text-align: center; padding: 40px; color: #999;">Loading sessions...</p>
+                <p style="text-align: center; padding: 40px; color: #888;">Loading sessions...</p>
             </div>
         </div>
     </div>
@@ -66,7 +95,7 @@
             const container = document.getElementById('sessionsContainer');
             
             if (sessions.length === 0) {
-                container.innerHTML = '<p style="text-align: center; color: #999;">No sessions booked yet. <a href="experts.php">Book your first session</a></p>';
+                container.innerHTML = '<p style="text-align: center; color: #888;">No sessions booked yet. <a href="experts.php" style="color: #0a0a0a; font-weight: 600;">Book your first session</a></p>';
                 return;
             }
 
@@ -84,8 +113,8 @@
                     <div class="session-card">
                         <div class="session-header">
                             <div>
-                                <h3 style="color: #333; margin-bottom: 5px;">Session with ${expertName}</h3>
-                                ${s.specialization ? `<p style="color: #667eea; font-size: 14px;">${s.specialization}</p>` : ''}
+                                <h3>${expertName}</h3>
+                                ${s.specialization ? `<p style="color: #888; font-size: 13px; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">${s.specialization}</p>` : ''}
                             </div>
                             <span class="badge ${statusBadge}">${s.status.toUpperCase()}</span>
                         </div>
@@ -95,7 +124,7 @@
                             <div class="detail-item"><i class="fas fa-video"></i> ${s.session_type}</div>
                             <div class="detail-item"><i class="fas fa-rupee-sign"></i> ₹${parseFloat(s.amount).toFixed(2)}</div>
                         </div>
-                        ${s.notes ? `<p style="margin-top: 15px; padding: 10px; background: white; border-radius: 5px; color: #666;"><strong>Notes:</strong> ${s.notes}</p>` : ''}
+                        ${s.notes ? `<p style="margin-top: 16px; padding: 12px; background: white; border-radius: 2px; color: #666; border-left: 2px solid #ddd;"><strong style="color: #0a0a0a;">Notes:</strong> ${s.notes}</p>` : ''}
                     </div>
                 `;
             });

@@ -1,0 +1,313 @@
+/* Law Connectors - Black & White Professional Theme */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #fafafa;
+    min-height: 100vh;
+    color: #0a0a0a;
+}
+
+/* Navigation Bar */
+.navbar {
+    background: #fff;
+    border-bottom: 1px solid #e8e8e4;
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #0a0a0a;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.logo i {
+    font-size: 24px;
+    color: #0a0a0a;
+}
+
+.nav-right, .nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Buttons */
+.btn {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    letter-spacing: 0.3px;
+    font-family: 'Inter', sans-serif;
+}
+
+.btn-primary {
+    background: #0a0a0a;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #222;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: #f5f5f3;
+    color: #0a0a0a;
+}
+
+.btn-secondary:hover {
+    background: #eaeae6;
+}
+
+.btn-success {
+    background: #0a0a0a;
+    color: white;
+}
+
+.btn-success:hover {
+    background: #222;
+}
+
+/* Container */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 32px 24px;
+}
+
+/* Page Header */
+.page-header {
+    margin-bottom: 32px;
+}
+
+.page-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #0a0a0a;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+
+.page-header p {
+    font-size: 16px;
+    color: #888;
+}
+
+/* Content Box */
+.content-box {
+    background: white;
+    padding: 32px;
+    border-radius: 4px;
+    border: 1px solid #e8e8e4;
+    margin-bottom: 24px;
+}
+
+.content-box h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #0a0a0a;
+    margin-bottom: 20px;
+    letter-spacing: -0.5px;
+}
+
+/* Cards */
+.card {
+    background: white;
+    border-radius: 4px;
+    padding: 24px;
+    border: 1px solid #e8e8e4;
+    transition: all 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    border-color: #0a0a0a;
+}
+
+/* Form Elements */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #0a0a0a;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid #ddd;
+    border-radius: 2px;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #0a0a0a;
+    box-shadow: 0 0 0 3px rgba(10,10,10,0.06);
+}
+
+.form-group input::placeholder {
+    color: #bbb;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 4px;
+    padding: 32px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.modal-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #0a0a0a;
+    letter-spacing: -0.5px;
+}
+
+.close-btn {
+    font-size: 28px;
+    cursor: pointer;
+    color: #888;
+    background: none;
+    border: none;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: #0a0a0a;
+}
+
+/* Badges */
+.badge {
+    padding: 6px 12px;
+    border-radius: 2px;
+    font-size:11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge-success {
+    background: #f0f0f0;
+    color: #0a0a0a;
+}
+
+.badge-warning {
+    background: #f5f5f3;
+    color: #666;
+}
+
+.badge-danger {
+    background: #f0f0f0;
+    color: #666;
+}
+
+.badge-info {
+    background: #f0f0f0;
+    color: #0a0a0a;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .navbar-container {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 16px 20px;
+        gap: 12px;
+    }
+    
+    .nav-right, .nav-buttons {
+        width: 100%;
+    }
+    
+    .page-header h1 {
+        font-size: 28px;
+    }
+    
+    .container {
+        padding: 24px 20px;
+    }
+    
+    .content-box {
+        padding: 24px 20px;
+    }
+}

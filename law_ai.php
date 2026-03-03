@@ -144,7 +144,7 @@
             showTyping();
 
             try {
-                const response = await fetch('lib/ai_chat.php', {
+                const response = await fetch('lib/ai/ai_chat.php', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({message: message})

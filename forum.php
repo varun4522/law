@@ -5,57 +5,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forum - Law Connectors</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {margin: 0; padding: 0; box-sizing: border-box;}
-        body {font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px;}
-        .container {max-width: 1200px; margin: 0 auto;}
-        .header {background: white; padding: 20px 30px; border-radius: 15px; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;}
-        .logo {font-size: 24px; font-weight: bold; color: #667eea; display: flex; align-items: center; gap: 10px;}
-        .nav-buttons {display: flex; gap: 10px; flex-wrap: wrap;}
-        .btn {padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600; transition: all 0.3s; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;}
-        .btn-primary {background: #667eea; color: white;}
-        .btn-primary:hover {background: #5568d3; transform: translateY(-2px);}
-        .btn-secondary {background: #f0f0f0; color: #333;}
-        .btn-success {background: #28a745; color: white;}
-        .content-box {background: white; padding: 25px; border-radius: 15px; margin-bottom: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);}
-        .question-card {background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 15px; cursor: pointer; transition: all 0.3s;}
-        .question-card:hover {transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1);}
-        .question-header {display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px;}
-        .question-title {font-size: 18px; font-weight: 600; color: #333;}
-        .question-meta {display: flex; gap: 15px; font-size: 13px; color: #999; margin-top: 10px;}
-        .badge {padding: 5px 12px; border-radius: 15px; font-size: 12px; font-weight: 600;}
-        .badge-success {background: #d4edda; color: #28a745;}
-        .badge-warning {background: #fff3cd; color: #ffc107;}
-        .badge-info {background: #d1ecf1; color: #17a2b8;}
-        .modal {display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; padding: 20px;}
+        body {font-family: 'Inter', sans-serif; background: #fff; color: #0a0a0a;}
+        
+        .navbar {background: #0a0a0a; padding: 15px 0; position: sticky; top: 0; z-index: 100;}
+        .nav-container {max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;}
+        .logo {font-family: 'Playfair Display', serif; font-size: 24px; color: #fff; font-weight: 700; text-decoration: none;}
+        .nav-links {display: flex; gap: 0; align-items: center; flex-wrap: wrap;}
+        .nav-links a {color: #fff; text-decoration: none; padding: 10px 20px; font-size: 14px; font-weight: 500; transition: all 0.2s; border-radius: 2px;}
+        .nav-links a:hover {background: #1a1a1a;}
+        .nav-links a.active {background: #fff; color: #0a0a0a;}
+        
+        .container {max-width: 1200px; margin: 0 auto; padding: 40px 20px;}
+        
+        .page-header {margin-bottom: 40px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px;}
+        .page-header-text h1 {font-family: 'Playfair Display', serif; font-size: 42px; color: #0a0a0a; margin-bottom: 10px;}
+        .page-header-text p {color: #888; font-size: 16px;}
+        
+        .btn {padding: 12px 28px; border: none; border-radius: 2px; cursor: pointer; font-size: 14px; font-weight: 600; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-family: 'Inter', sans-serif;}
+        .btn-primary {background: #0a0a0a; color: #fff;}
+        .btn-primary:hover {background: #1a1a1a;}
+        .btn-secondary {background: #f5f5f3; color: #0a0a0a;}
+        .btn-secondary:hover {background: #e8e8e4;}
+        
+        .content-box {background: #fafafa; padding: 30px; border-radius: 4px; margin-bottom: 25px; border: 1px solid #e8e8e4;}
+        
+        .question-card {background: #fff; padding: 25px; border-radius: 4px; margin-bottom: 20px; cursor: pointer; transition: all 0.2s; border: 1px solid #e8e8e4;}
+        .question-card:hover {border-color: #0a0a0a;}
+        .question-header {display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; margin-bottom: 15px;}
+        .question-title {font-size: 20px; font-weight: 600; color: #0a0a0a; margin-bottom: 10px;}
+        .question-meta {display: flex; gap: 20px; font-size: 13px; color: #888; flex-wrap: wrap;}
+        .question-meta span {display: flex; align-items: center; gap: 6px;}
+        
+        .badge {padding: 6px 14px; border-radius: 2px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;}
+        .badge-answered {background: #0a0a0a; color: #fff;}
+        .badge-open {background: #fff3cd; color: #856404;}
+        
+        .modal {display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center; padding: 20px;}
         .modal.active {display: flex;}
-        .modal-content {background: white; border-radius: 15px; padding: 30px; max-width: 600px; width: 100%; max-height: 90vh; overflow-y: auto;}
-        .modal-header {display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;}
-        .close-btn {font-size: 28px; cursor: pointer; color: #999;}
-        .form-group {margin-bottom: 20px;}
-        .form-group label {display: block; margin-bottom: 8px; font-weight: 600; color: #333;}
-        .form-group input, .form-group select, .form-group textarea {width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 14px;}
+        .modal-content {background: #fff; border-radius: 4px; padding: 40px; max-width: 700px; width: 100%; max-height: 90vh; overflow-y: auto;}
+        .modal-header {margin-bottom: 30px;}
+        .modal-header h2 {font-family: 'Playfair Display', serif; font-size: 28px; color: #0a0a0a; margin-bottom: 10px;}
+        .modal-header p {color: #888; font-size: 14px;}
+        
+        .form-group {margin-bottom: 25px;}
+        .form-group label {display: block; margin-bottom: 8px; font-weight: 600; color: #0a0a0a; font-size: 14px;}
+        .form-group input, .form-group select, .form-group textarea {width: 100%; padding: 12px 16px; border: 1px solid #ddd; border-radius: 2px; font-size: 14px; font-family: 'Inter', sans-serif;}
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {outline: none; border-color: #0a0a0a;}
         .checkbox-group {display: flex; align-items: center; gap: 10px;}
         .checkbox-group input[type="checkbox"] {width: auto;}
-        @media (max-width: 768px) {.header {flex-direction: column; align-items: stretch;} .nav-buttons {justify-content: center;}}
+        
+        hr {border: none; border-top: 1px solid #e8e8e4; margin: 30px 0;}
+        
+        @media (max-width: 768px) {
+            .page-header {flex-direction: column;}
+            .page-header-text h1 {font-size: 32px;}
+            .nav-container {flex-direction: column; align-items: stretch;}
+            .nav-links {flex-direction: column; width: 100%;}
+            .nav-links a {text-align: center;}
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="logo"><i class="fas fa-comments"></i> Law Connectors - Ask a Lawyer Forum</div>
-            <div class="nav-buttons">
-                <a href="mainhome.php" class="btn btn-secondary"><i class="fas fa-home"></i> Dashboard</a>
-                <a href="experts.php" class="btn btn-secondary"><i class="fas fa-users"></i> Experts</a>
-                <button class="btn btn-success" onclick="openAskQuestionModal()"><i class="fas fa-plus"></i> Ask Question</button>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="mainhome.php" class="logo">Law Connectors</a>
+            <div class="nav-links">
+                <a href="mainhome.php"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="experts.php"><i class="fas fa-users"></i> Experts</a>
+                <a href="sessions.php"><i class="fas fa-calendar"></i> Sessions</a>
+                <a href="forum.php" class="active"><i class="fas fa-comments"></i> Forum</a>
+                <a href="wallet.php"><i class="fas fa-wallet"></i> Wallet</a>
+                <a href="lib/logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </div>
         </div>
+    </nav>
 
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="page-header-text">
+                <h1>Ask a Lawyer Forum</h1>
+                <p>Get answers to your legal questions from expert lawyers</p>
+            </div>
+            <button class="btn btn-primary" onclick="openAskQuestionModal()">
+                <i class="fas fa-plus"></i> Ask Question
+            </button>
+        </div>
+
+        <!-- Questions List -->
         <div class="content-box">
-            <h2 style="margin-bottom: 20px; color: #333;">Recent Questions</h2>
             <div id="questionsContainer">
-                <p style="text-align: center; padding: 40px; color: #999;">Loading questions...</p>
+                <p style="text-align: center; padding: 40px; color: #888;">Loading questions...</p>
             </div>
         </div>
     </div>
@@ -64,34 +112,41 @@
     <div id="askQuestionModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Ask a Question</h2>
-                <span class="close-btn" onclick="closeAskModal()">&times;</span>
+                <h2>Ask Your Question</h2>
+                <p>Our expert lawyers will answer your legal queries</p>
             </div>
             <form id="askQuestionForm">
                 <div class="form-group">
-                    <label>Title</label>
-                    <input type="text" id="questionTitle" required placeholder="Brief summary of your question">
+                    <label>Question Title</label>
+                    <input type="text" id="questionTitle" required placeholder="Brief summary of your legal question">
                 </div>
                 <div class="form-group">
-                    <label>Category</label>
+                    <label>Legal Category</label>
                     <select id="questionCategory" required>
-                        <option value="General">General</option>
+                        <option value="General">General Law</option>
                         <option value="Family Law">Family Law</option>
                         <option value="Criminal Law">Criminal Law</option>
-                        <option value="Corporate Law">Corporate Law</option>
-                        <option value="Property Law">Property Law</option>
-                        <option value="Tax Law">Tax Law</option>
+                        <option value="Corporate Law">Corporate & Business Law</option>
+                        <option value="Property Law">Property & Real Estate</option>
+                        <option value="Tax Law">Tax & Financial Law</option>
+                        <option value="Labour Law">Labour & Employment</option>
+                        <option value="Consumer Law">Consumer Protection</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Your Question</label>
-                    <textarea id="questionText" rows="6" required placeholder="Describe your legal question in detail..."></textarea>
+                    <label>Detailed Question</label>
+                    <textarea id="questionText" rows="8" required placeholder="Describe your legal question in detail. Include relevant facts and circumstances..."></textarea>
                 </div>
                 <div class="form-group checkbox-group">
                     <input type="checkbox" id="isAnonymous">
-                    <label for="isAnonymous" style="margin: 0;">Post anonymously</label>
+                    <label for="isAnonymous" style="margin: 0; font-weight: 400;">Post anonymously</label>
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;"><i class="fas fa-paper-plane"></i> Post Question</button>
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">
+                        <i class="fas fa-paper-plane"></i> Post Question
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="closeAskModal()">Cancel</button>
+                </div>
             </form>
         </div>
     </div>
@@ -101,16 +156,20 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2>Question Details</h2>
-                <span class="close-btn" onclick="closeViewModal()">&times;</span>
             </div>
             <div id="questionDetails"></div>
-            <hr style="margin: 25px 0;">
-            <h3 style="margin-bottom: 15px;">Your Answer</h3>
+            <hr>
+            <h3 style="margin-bottom: 20px; font-size: 20px; font-weight: 600;">Submit Your Answer</h3>
             <form id="answerForm">
                 <div class="form-group">
-                    <textarea id="answerText" rows="4" required placeholder="Type your answer here..."></textarea>
+                    <textarea id="answerText" rows="6" required placeholder="Provide a detailed legal answer..."></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary"><i class="fas fa-reply"></i> Submit Answer</button>
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">
+                        <i class="fas fa-reply"></i> Submit Answer
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="closeViewModal()">Close</button>
+                </div>
             </form>
         </div>
     </div>
@@ -136,19 +195,19 @@
             const container = document.getElementById('questionsContainer');
             
             if (questions.length === 0) {
-                container.innerHTML = '<p style="text-align: center; color: #999;">No questions yet. Be the first to ask!</p>';
+                container.innerHTML = '<p style="text-align: center; padding: 40px; color: #888;">No questions yet. Be the first to ask!</p>';
                 return;
             }
 
             let html = '';
             questions.forEach(q => {
-                const statusBadge = q.status === 'answered' ? 'badge-success' : 'badge-warning';
+                const statusBadge = q.status === 'answered' ? 'badge-answered' : 'badge-open';
                 const statusText = q.status === 'answered' ? 'Answered' : 'Open';
                 
                 html += `
                     <div class="question-card" onclick="viewQuestion(${q.id})">
                         <div class="question-header">
-                            <div>
+                            <div style="flex: 1;">
                                 <div class="question-title">${q.title}</div>
                                 <div class="question-meta">
                                     <span><i class="fas fa-user"></i> ${q.author_name || 'Anonymous'}</span>

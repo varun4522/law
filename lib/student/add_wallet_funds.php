@@ -1,5 +1,6 @@
 <?php
 require_once '../db.php';
+require_once '../payment/payment_config.php';
 
 requireAuth();
 setJsonHeader();
@@ -17,28 +18,52 @@ if (!isset($input['amount']) || $input['amount'] <= 0) {
 $amount = floatval($input['amount']);
 $userId = $_SESSION['user_id'];
 
+if ($amount < MIN_PAYMENT) {
+    sendErrorResponse('Minimum amount is ₹' . MIN_PAYMENT);
+}
+
+if ($amount > MAX_PAYMENT) {
+    sendErrorResponse('Maximum amount is ₹' . number_format(MAX_PAYMENT));
+}
+
 $pdo = getDBConnection();
 if (!$pdo) {
     sendErrorResponse('Database connection failed', 500);
 }
 
 try {
-    $pdo->beginTransaction();
+    // Generate payment reference
+    $payment_reference = generatePaymentReference();
     
-    // Update wallet balance
-    $stmt = $pdo->prepare("UPDATE users SET wallet_balance = wallet_balance + ? WHERE id = ?");
-    $stmt->execute([$amount, $userId]);
+    // Create payment record
+    $stmt = $pdo->prepare("
+        INSERT INTO payments (
+            user_id, 
+            amount, 
+            payment_type, 
+            payment_method, 
+            payment_reference, 
+            status, 
+            created_at
+        ) VALUES (?, ?, 'wallet_recharge', 'paytm', ?, 'pending', NOW())
+    ");
     
-    // Add transaction record
-    $stmt = $pdo->prepare("INSERT INTO wallet_transactions (user_id, transaction_type, amount, description, status) VALUES (?, 'credit', ?, 'Wallet recharge', 'completed')");
-    $stmt->execute([$userId, $amount]);
+    $stmt->execute([$userId, $amount, $payment_reference]);
+    $payment_id = $pdo->lastInsertId();
     
-    $pdo->commit();
+    // Get payment details
+    $payment_details = getPaymentDetails();
     
-    sendSuccessResponse(null, 'Funds added successfully');
+    sendSuccessResponse([
+        'payment_id' => $payment_id,
+        'payment_reference' => $payment_reference,
+        'amount' => $amount,
+        'paytm_number' => $payment_details['paytm_number'],
+        'upi_id' => $payment_details['upi_id'],
+        'payment_note' => $payment_details['payment_note'] . ' - ' . $payment_reference
+    ], 'Complete payment and submit transaction ID');
     
 } catch (PDOException $e) {
-    $pdo->rollBack();
     error_log("Add funds error: " . $e->getMessage());
     sendErrorResponse('An error occurred', 500);
 }
