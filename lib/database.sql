@@ -213,3 +213,158 @@ CREATE INDEX idx_reminders_user_id ON reminders(user_id);
 CREATE INDEX idx_reminders_date ON reminders(reminder_date);
 CREATE INDEX idx_auth_sessions_token ON auth_sessions(session_token);
 CREATE INDEX idx_auth_sessions_expires ON auth_sessions(expires_at);
+
+-- Advanced Features Tables
+
+-- Favorite experts table (for students)
+CREATE TABLE IF NOT EXISTS favorite_experts (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  expert_id INT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  FOREIGN KEY (expert_id) REFERENCES users(id) ON DELETE CASCADE,
+  UNIQUE KEY unique_favorite (user_id, expert_id)
+);
+
+-- Expert availability schedule
+CREATE TABLE IF NOT EXISTS expert_availability (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  expert_id INT NOT NULL,
+  day_of_week VARCHAR(20) NOT NULL,
+  start_time TIME NOT NULL,
+  end_time TIME NOT NULL,
+  is_available TINYINT(1) DEFAULT 1,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (expert_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Session documents (uploaded by users/experts)
+CREATE TABLE IF NOT EXISTS session_documents (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  session_id INT NOT NULL,
+  uploaded_by INT NOT NULL,
+  title VARCHAR(255),
+  description TEXT,
+  file_path VARCHAR(500) NOT NULL,
+  file_size INT,
+  file_type VARCHAR(50),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (session_id) REFERENCES consultation_sessions(id) ON DELETE CASCADE,
+  FOREIGN KEY (uploaded_by) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Session templates (for experts)
+CREATE TABLE IF NOT EXISTS session_templates (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  expert_id INT NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  content TEXT NOT NULL,
+  category VARCHAR(100) DEFAULT 'general',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (expert_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Expert certifications
+CREATE TABLE IF NOT EXISTS expert_certifications (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  expert_id INT NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  type VARCHAR(100) DEFAULT 'other',
+  issuer VARCHAR(255),
+  issue_date DATE,
+  file_path VARCHAR(500),
+  verification_status VARCHAR(50) DEFAULT 'pending',
+  verified_at TIMESTAMP NULL,
+  verified_by INT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (expert_id) REFERENCES users(id) ON DELETE CASCADE,
+  FOREIGN KEY (verified_by) REFERENCES users(id) ON DELETE SET NULL,
+  CONSTRAINT chk_cert_verification CHECK (verification_status IN ('pending', 'verified', 'rejected'))
+);
+
+-- Disputes table
+CREATE TABLE IF NOT EXISTS disputes (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  session_id INT,
+  reason TEXT NOT NULL,
+  description TEXT,
+  status VARCHAR(50) DEFAULT 'pending',
+  refund_amount DECIMAL(10,2) DEFAULT 0.00,
+  admin_notes TEXT,
+  resolved_at TIMESTAMP NULL,
+  resolved_by INT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  FOREIGN KEY (session_id) REFERENCES consultation_sessions(id) ON DELETE SET NULL,
+  FOREIGN KEY (resolved_by) REFERENCES users(id) ON DELETE SET NULL,
+  CONSTRAINT chk_dispute_status CHECK (status IN ('pending', 'resolved', 'rejected'))
+);
+
+-- System logs (audit trail)
+CREATE TABLE IF NOT EXISTS system_logs (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT,
+  action VARCHAR(100) NOT NULL,
+  details TEXT,
+  ip_address VARCHAR(50),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
+);
+
+-- Content reports (for forum moderation)
+CREATE TABLE IF NOT EXISTS content_reports (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  content_type VARCHAR(50) NOT NULL,
+  content_id INT NOT NULL,
+  reported_by INT NOT NULL,
+  reason VARCHAR(255) NOT NULL,
+  description TEXT,
+  status VARCHAR(50) DEFAULT 'pending',
+  resolution TEXT,
+  admin_notes TEXT,
+  resolved_at TIMESTAMP NULL,
+  resolved_by INT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (reported_by) REFERENCES users(id) ON DELETE CASCADE,
+  FOREIGN KEY (resolved_by) REFERENCES users(id) ON DELETE SET NULL,
+  CONSTRAINT chk_report_status CHECK (status IN ('pending', 'resolved', 'dismissed')),
+  CONSTRAINT chk_content_type CHECK (content_type IN ('question', 'answer'))
+);
+
+-- Platform settings
+CREATE TABLE IF NOT EXISTS platform_settings (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  setting_key VARCHAR(100) NOT NULL UNIQUE,
+  setting_value TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Add status column to users table (for activate/deactivate)
+ALTER TABLE users ADD COLUMN IF NOT EXISTS status VARCHAR(20) DEFAULT 'active';
+
+-- Create indexes for new tables
+CREATE INDEX idx_favorite_experts_user ON favorite_experts(user_id);
+CREATE INDEX idx_favorite_experts_expert ON favorite_experts(expert_id);
+CREATE INDEX idx_expert_availability_expert ON expert_availability(expert_id);
+CREATE INDEX idx_expert_availability_day ON expert_availability(day_of_week);
+CREATE INDEX idx_session_documents_session ON session_documents(session_id);
+CREATE INDEX idx_session_documents_uploader ON session_documents(uploaded_by);
+CREATE INDEX idx_session_templates_expert ON session_templates(expert_id);
+CREATE INDEX idx_expert_certifications_expert ON expert_certifications(expert_id);
+CREATE INDEX idx_expert_certifications_status ON expert_certifications(verification_status);
+CREATE INDEX idx_disputes_user ON disputes(user_id);
+CREATE INDEX idx_disputes_status ON disputes(status);
+CREATE INDEX idx_system_logs_user ON system_logs(user_id);
+CREATE INDEX idx_system_logs_action ON system_logs(action);
+CREATE INDEX idx_system_logs_created ON system_logs(created_at DESC);
+CREATE INDEX idx_content_reports_status ON content_reports(status);
+CREATE INDEX idx_content_reports_type ON content_reports(content_type, content_id);
+
+-- Insert default platform settings
+INSERT INTO platform_settings (setting_key, setting_value) 
+VALUES ('commission_rate', '15') 
+ON DUPLICATE KEY UPDATE setting_key = setting_key;

@@ -10,17 +10,24 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $input = json_decode(file_get_contents('php://input'), true);
 
 // Validate required fields
-$requiredFields = ['email', 'password', 'fullName', 'role'];
+$requiredFields = ['email', 'password', 'fullName', 'type'];
 foreach ($requiredFields as $field) {
-    if (!isset($input[$field]) || empty(trim($input[$field]))) {
+    if (!isset($input[$field]) || (is_string($input[$field]) && empty(trim($input[$field])))) {
         sendErrorResponse(ucfirst($field) . ' is required');
     }
 }
 
-$email = trim($input['email']);
+$email    = trim($input['email']);
 $password = $input['password'];
 $fullName = trim($input['fullName']);
-$role = trim($input['role']);
+$type     = intval($input['type']);
+
+// Map numeric type to role
+$typeMap = [1 => 'user', 2 => 'expert', 3 => 'admin'];
+if (!array_key_exists($type, $typeMap)) {
+    sendErrorResponse('Invalid type. Use 1 (User), 2 (Expert), or 3 (Admin)');
+}
+$role = $typeMap[$type];
 
 // Validate email format
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -44,11 +51,7 @@ if (!preg_match('/\d/', $password)) {
     sendErrorResponse('Password must contain at least one number');
 }
 
-// Validate role
-$validRoles = ['user', 'expert'];
-if (!in_array($role, $validRoles)) {
-    sendErrorResponse('Invalid role selected');
-}
+// Validate role (already resolved from type above)
 
 $pdo = getDBConnection();
 if (!$pdo) {
