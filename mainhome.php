@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Law Connectors</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&family=Dancing+Script:wght@500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {margin: 0; padding: 0; box-sizing: border-box;}
@@ -141,19 +141,28 @@
             border-color: #0a0a0a;
         }
         
+        /* Cursive Typography */
+        .cursive {
+            font-family: 'Dancing Script', cursive;
+            font-weight: 600;
+        }
+        .cursive-fancy {
+            font-family: 'Great Vibes', cursive;
+        }
+        
         /* Container */
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 32px 24px;
+            padding: 40px 32px;
         }
         
         /* Welcome Section */
         .welcome-section {
             background: #0a0a0a;
             border-radius: 4px;
-            padding: 40px;
-            margin-bottom: 32px;
+            padding: 52px 48px;
+            margin-bottom: 40px;
             color: white;
             position: relative;
             overflow: hidden;
@@ -161,25 +170,63 @@
         .welcome-section::before {
             content: '';
             position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 200px;
-            height: 200px;
-            background: rgba(255,255,255,0.03);
+            top: -60px;
+            right: -60px;
+            width: 280px;
+            height: 280px;
+            background: rgba(255,255,255,0.04);
             border-radius: 50%;
+        }
+        .welcome-section::after {
+            content: '';
+            position: absolute;
+            bottom: -40px;
+            left: 40px;
+            width: 160px;
+            height: 160px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 50%;
+        }
+        .welcome-tagline {
+            font-family: 'Great Vibes', cursive;
+            font-size: 28px;
+            color: rgba(255,255,255,0.55);
+            margin-bottom: 12px;
+            position: relative;
+            display: block;
+            letter-spacing: 0.5px;
         }
         .welcome-section h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             position: relative;
             letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+        .welcome-section h1 span.name-highlight {
+            font-family: 'Dancing Script', cursive;
+            font-size: 42px;
+            font-weight: 700;
+            color: #e8e8e4;
         }
         .welcome-section p {
             font-size: 16px;
-            opacity: 0.9;
+            opacity: 0.75;
             position: relative;
+            max-width: 560px;
+            line-height: 1.7;
+        }
+        .welcome-quote {
+            display: block;
+            margin-top: 28px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 22px;
+            color: rgba(255,255,255,0.45);
+            position: relative;
+            padding-left: 20px;
+            border-left: 2px solid rgba(255,255,255,0.2);
         }
         
         /* Stats Grid */
@@ -187,11 +234,11 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 20px;
-            margin-bottom: 32px;
+            margin-bottom: 40px;
         }
         .stat-card {
             background: white;
-            padding: 24px;
+            padding: 28px;
             border-radius: 4px;
             border: 1px solid #e8e8e4;
             transition: all 0.3s;
@@ -234,11 +281,26 @@
         /* Section Title */
         .section-title {
             font-family: 'Playfair Display', serif;
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 700;
             color: #0a0a0a;
-            margin-bottom: 20px;
+            margin-bottom: 8px;
             letter-spacing: -0.5px;
+        }
+        .section-subtitle {
+            font-family: 'Dancing Script', cursive;
+            font-size: 18px;
+            color: #888;
+            margin-bottom: 24px;
+            display: block;
+            font-weight: 500;
+        }
+        .section-divider {
+            width: 48px;
+            height: 3px;
+            background: #0a0a0a;
+            margin-bottom: 28px;
+            border-radius: 2px;
         }
         
         /* Quick Actions Grid */
@@ -246,11 +308,11 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
-            margin-bottom: 32px;
+            margin-bottom: 40px;
         }
         .action-card {
             background: white;
-            padding: 28px;
+            padding: 32px;
             border-radius: 4px;
             border: 1px solid #e8e8e4;
             cursor: pointer;
@@ -281,7 +343,7 @@
         }
         .action-icon {
             font-size: 36px;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
             display: block;
             color: #0a0a0a;
         }
@@ -289,12 +351,19 @@
             color: #0a0a0a;
             font-size: 18px;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
+        }
+        .action-card-label {
+            font-family: 'Dancing Script', cursive;
+            font-size: 14px;
+            color: #bbb;
+            display: block;
+            margin-bottom: 10px;
         }
         .action-card p {
             color: #888;
             font-size: 14px;
-            line-height: 1.5;
+            line-height: 1.6;
         }
         
         /* Bottom Navigation Bar */
@@ -408,11 +477,24 @@
                 font-size: 13px;
                 padding: 8px 14px;
             }
+            .container {
+                padding: 24px 16px;
+            }
             .welcome-section {
-                padding: 20px 16px;
+                padding: 32px 24px;
             }
             .welcome-section h1 {
-                font-size: 24px;
+                font-size: 26px;
+            }
+            .welcome-section h1 span.name-highlight {
+                font-size: 32px;
+            }
+            .welcome-tagline {
+                font-size: 22px;
+            }
+            .welcome-quote {
+                font-size: 18px;
+                margin-top: 20px;
             }
             .welcome-section p {
                 font-size: 14px;
@@ -500,8 +582,10 @@
     <div class="container">
         <!-- Welcome Section -->
         <div class="welcome-section">
-            <h1>Welcome back, <span id="welcomeName">User</span>!</h1>
-            <p>Your one-stop platform for legal consultation, expert advice, and legal resources.</p>
+            <span class="welcome-tagline">Your Legal Journey Starts Here</span>
+            <h1>Welcome back, <span class="name-highlight" id="welcomeName">User</span>!</h1>
+            <p>Your one-stop platform for legal consultation, expert advice, and legal resources tailored for you.</p>
+            <span class="welcome-quote">"Justice delayed is justice denied." &mdash; William Gladstone</span>
         </div>
 
         <!-- Stats Grid -->
@@ -546,6 +630,8 @@
 
         <!-- Quick Actions -->
         <h2 class="section-title">Quick Actions</h2>
+        <span class="section-subtitle">Everything you need, right at your fingertips</span>
+        <div class="section-divider"></div>
         <div id="quickActionsContainer" class="quick-actions">
             <!-- Dynamic content loaded based on user role -->
         </div>
@@ -587,6 +673,7 @@
                             <i class="fas fa-shield-alt"></i>
                         </div>
                         <h3>Admin Panel</h3>
+                        <span class="action-card-label">Control & Oversight</span>
                         <p>Manage users, experts, and monitor system performance</p>
                     </a>
                 `;
@@ -600,6 +687,7 @@
                             <i class="fas fa-user-tie"></i>
                         </div>
                         <h3>Expert Dashboard</h3>
+                        <span class="action-card-label">Your Professional Space</span>
                         <p>Manage session requests and update your profile</p>
                     </a>
                 `;
@@ -612,6 +700,7 @@
                         <i class="fas fa-robot"></i>
                     </div>
                     <h3>Law AI Assistant</h3>
+                    <span class="action-card-label">Powered by Intelligence</span>
                     <p>Get instant legal answers 24/7 from our AI</p>
                 </a>
             `;
@@ -623,6 +712,7 @@
                         <i class="fas fa-users"></i>
                     </div>
                     <h3>Find Experts</h3>
+                    <span class="action-card-label">Connect & Consult</span>
                     <p>Browse verified legal experts and book consultations</p>
                 </a>
                 
@@ -631,6 +721,7 @@
                         <i class="fas fa-calendar-check"></i>
                     </div>
                     <h3>My Sessions</h3>
+                    <span class="action-card-label">Track your Meetings</span>
                     <p>View and manage your consultation bookings</p>
                 </a>
                 
@@ -639,6 +730,7 @@
                         <i class="fas fa-comments"></i>
                     </div>
                     <h3>Ask a Lawyer</h3>
+                    <span class="action-card-label">Community Wisdom</span>
                     <p>Get free answers from legal experts in our community forum</p>
                 </a>
                 
@@ -647,6 +739,7 @@
                         <i class="fas fa-wallet"></i>
                     </div>
                     <h3>Wallet</h3>
+                    <span class="action-card-label">Your Balance & History</span>
                     <p>Manage your balance and view transaction history</p>
                 </a>
             `;
