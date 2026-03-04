@@ -1,4 +1,4 @@
-<?php require_once 'lib/db.php'; requireAuth(); ?>
+<?php require_once __DIR__ . '/../lib/db.php'; requireAuth(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

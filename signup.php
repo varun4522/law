@@ -508,9 +508,11 @@ if (isLoggedIn()) {
         function showAlert(message, type) {
             alertBox.textContent = message;
             alertBox.className = `alert ${type}`;
+            alertBox.style.display = 'block';
             if (type !== 'info') {
                 setTimeout(() => {
                     alertBox.className = 'alert';
+                    alertBox.style.display = 'none';
                 }, 5000);
             }
         }
