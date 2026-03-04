@@ -439,15 +439,7 @@ if (isLoggedIn()) {
                         <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
                     </div>
 
-                    <div class="form-group">
-                        <label for="type">Account Type</label>
-                        <input type="number" id="type" name="type" placeholder="Enter 1, 2, or 3" min="1" max="3" required>
-                        <div class="type-helper">
-                            <strong>1</strong> = User (Client seeking legal help) · 
-                            <strong>2</strong> = Expert (Legal professional) · 
-                            <strong>3</strong> = Admin (Platform administrator)
-                        </div>
-                    </div>
+            
 
                     <button type="submit">Create Account</button>
                 </form>
@@ -531,19 +523,14 @@ if (isLoggedIn()) {
             const email = document.getElementById('email').value.trim();
             const password = passwordInput.value;
             const confirmPassword = confirmPasswordInput.value;
-            const type = parseInt(document.getElementById('type').value);
+            // Default account type set to Student (mapped as 1)
+            const type = 1;
 
-            // Validation
-            if (!fullName || !email || !password || !confirmPassword || !type) {
+            // Validation (account type is defaulted)
+            if (!fullName || !email || !password || !confirmPassword) {
                 showAlert('Please fill in all fields.', 'error');
                 return;
             }
-
-            if (![1, 2, 3].includes(type)) {
-                showAlert('Invalid account type. Enter 1, 2, or 3.', 'error');
-                return;
-            }
-
             if (password !== confirmPassword) {
                 showAlert('Passwords do not match.', 'error');
                 return;
