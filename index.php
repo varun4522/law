@@ -260,7 +260,7 @@ if (isLoggedIn()) {
             else localStorage.removeItem('rememberEmail');
 
             showAlert('Login successful! Redirecting...', 'success');
-            setTimeout(() => { window.location.href = 'mainhome.php'; }, 900);
+            setTimeout(() => { window.location.href = 'student/mainhome.php'; }, 900);
         } catch (err) {
             showAlert(err.message || 'An error occurred', 'error');
             loadingDiv.style.display = 'none';

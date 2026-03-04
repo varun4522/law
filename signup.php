@@ -581,12 +581,12 @@ if (isLoggedIn()) {
                 }
 
                 // Success
-                showAlert('Account created successfully! Redirecting to login...', 'success');
+                showAlert('Account created successfully! Redirecting to your dashboard...', 'success');
                 loadingDiv.style.display = 'none';
                 
-                // Redirect to login after 2 seconds
+                // Redirect to student main home after 2 seconds
                 setTimeout(() => {
-                    window.location.href = 'index.php';
+                    window.location.href = 'student/mainhome.php';
                 }, 2000);
 
             } catch (error) {
