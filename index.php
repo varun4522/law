@@ -1,7 +1,10 @@
 <?php
 require_once 'lib/db.php';
 if (isLoggedIn()) {
-    header('Location: mainhome.php');
+    $role = intval($_SESSION['role'] ?? 1);
+    if ($role === 2)      header('Location: expert/newpage.php');
+    elseif ($role === 3)  header('Location: admin/1newpage.php');
+    else                  header('Location: student/mainhome.php');
     exit;
 }
 ?>
@@ -260,7 +263,11 @@ if (isLoggedIn()) {
             else localStorage.removeItem('rememberEmail');
 
             showAlert('Login successful! Redirecting...', 'success');
-            setTimeout(() => { window.location.href = 'student/mainhome.php'; }, 900);
+            const role = parseInt(result.data.user.role);
+            let redirect = 'student/mainhome.php';
+            if (role === 2) redirect = 'expert/newpage.php';
+            else if (role === 3) redirect = 'admin/1newpage.php';
+            setTimeout(() => { window.location.href = redirect; }, 900);
         } catch (err) {
             showAlert(err.message || 'An error occurred', 'error');
             loadingDiv.style.display = 'none';

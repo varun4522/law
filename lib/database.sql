@@ -1,6 +1,9 @@
 -- MySQL Database Schema for Law Connectors Application
 -- Database: law
 
+CREATE DATABASE IF NOT EXISTS law;
+USE law;
+
 -- Create users table
 CREATE TABLE IF NOT EXISTS users (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -8,13 +11,12 @@ CREATE TABLE IF NOT EXISTS users (
   password VARCHAR(255) NOT NULL,
   full_name VARCHAR(255),
   phone VARCHAR(20),
-  role VARCHAR(50) NOT NULL DEFAULT 'user',
+  `role` TINYINT NOT NULL DEFAULT 1 COMMENT '1=student 2=expert 3=admin',
   profile_image VARCHAR(500),
   bio TEXT,
   wallet_balance DECIMAL(10,2) DEFAULT 0.00,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  CONSTRAINT chk_role CHECK (role IN ('admin', 'user', 'expert'))
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 -- Create expert_profiles table for expert specific information
@@ -345,6 +347,17 @@ CREATE TABLE IF NOT EXISTS platform_settings (
 
 -- Add status column to users table (for activate/deactivate)
 ALTER TABLE users ADD COLUMN IF NOT EXISTS status VARCHAR(20) DEFAULT 'active';
+
+-- Drop old string-based role CHECK constraint if it exists (MariaDB syntax)
+ALTER TABLE users DROP CONSTRAINT IF EXISTS chk_role;
+
+-- ── Migrate role to numeric (run once on existing databases) ──────────────────
+-- If your users table already has string roles, run these to convert them:
+-- UPDATE users SET role = 1 WHERE role = 'user';
+-- UPDATE users SET role = 2 WHERE role = 'expert';
+-- UPDATE users SET role = 3 WHERE role = 'admin';
+-- ALTER TABLE users MODIFY COLUMN role TINYINT NOT NULL DEFAULT 1 COMMENT '1=student 2=expert 3=admin';
+-- ─────────────────────────────────────────────────────────────────────────────
 
 -- Create indexes for new tables
 CREATE INDEX IF NOT EXISTS idx_favorite_experts_user ON favorite_experts(user_id);

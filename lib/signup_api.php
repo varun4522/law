@@ -17,15 +17,9 @@ if (!isset($input['email']) || !isset($input['password']) || !isset($input['full
 $email    = trim($input['email']);
 $password = $input['password'];
 $fullName = trim($input['fullName']);
-// type 1 = student/user (default). Map numeric type to role string.
-$type     = isset($input['type']) ? intval($input['type']) : 1;
-
-$roleMap = [
-    1 => 'user',
-    2 => 'expert',
-    3 => 'admin',
-];
-$role = isset($roleMap[$type]) ? $roleMap[$type] : 'user';
+// role: 1 = student, 2 = expert, 3 = admin
+$type = isset($input['type']) ? intval($input['type']) : 1;
+$role = in_array($type, [1, 2, 3]) ? $type : 1;
 
 if (empty($email) || empty($password) || empty($fullName)) {
     sendErrorResponse('All fields are required');
