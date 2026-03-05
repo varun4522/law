@@ -104,19 +104,19 @@
             <i class="fas fa-home"></i>
             <span>Home</span>
         </a>
-        <a href="experts.php" class="nav-item <?php echo basename($_SERVER['PHP_SELF']) == 'experts.php' ? 'active' : ''; ?>">
+        <a href="connect.php" class="nav-item <?php echo basename($_SERVER['PHP_SELF']) == 'connect.php' ? 'active' : ''; ?>">
             <i class="fas fa-user-tie"></i>
             <span>Connect</span>
         </a>
-        <a href="law_ai.php" class="nav-item center-ai">
+        <a href="aitool.php" class="nav-item center-ai <?php echo basename($_SERVER['PHP_SELF']) == 'aitool.php' ? 'active' : ''; ?>">
             <i class="fas fa-robot"></i>
             <span>AI Tool</span>
         </a>
-        <a href="forum.php" class="nav-item <?php echo basename($_SERVER['PHP_SELF']) == 'forum.php' ? 'active' : ''; ?>">
+        <a href="community.php" class="nav-item <?php echo basename($_SERVER['PHP_SELF']) == 'community.php' ? 'active' : ''; ?>">
             <i class="fas fa-comments"></i>
             <span>Community</span>
         </a>
-        <a href="sessions.php" class="nav-item <?php echo basename($_SERVER['PHP_SELF']) == 'sessions.php' ? 'active' : ''; ?>">
+        <a href="profile.php" class="nav-item <?php echo basename($_SERVER['PHP_SELF']) == 'profile.php' ? 'active' : ''; ?>">
             <i class="fas fa-user-circle"></i>
             <span>Profile</span>
         </a>

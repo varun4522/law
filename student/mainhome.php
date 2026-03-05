@@ -695,7 +695,7 @@
 
             // Law AI - Available to everyone
             html += `
-                <a href="law_ai.php" class="action-card">
+                <a href="aitool.php" class="action-card">
                     <div class="action-icon">
                         <i class="fas fa-robot"></i>
                     </div>
@@ -707,7 +707,7 @@
 
             // Common cards for all users
             html += `
-                <a href="experts.php" class="action-card">
+                <a href="connect.php" class="action-card">
                     <div class="action-icon">
                         <i class="fas fa-users"></i>
                     </div>
@@ -716,31 +716,22 @@
                     <p>Browse verified legal experts and book consultations</p>
                 </a>
                 
-                <a href="sessions.php" class="action-card">
+                <a href="profile.php" class="action-card">
                     <div class="action-icon">
-                        <i class="fas fa-calendar-check"></i>
+                        <i class="fas fa-user-circle"></i>
                     </div>
-                    <h3>My Sessions</h3>
-                    <span class="action-card-label">Track your Meetings</span>
-                    <p>View and manage your consultation bookings</p>
+                    <h3>My Profile</h3>
+                    <span class="action-card-label">Your Account</span>
+                    <p>View sessions, wallet balance and update your profile</p>
                 </a>
                 
-                <a href="forum.php" class="action-card">
+                <a href="community.php" class="action-card">
                     <div class="action-icon">
                         <i class="fas fa-comments"></i>
                     </div>
                     <h3>Ask a Lawyer</h3>
                     <span class="action-card-label">Community Wisdom</span>
                     <p>Get free answers from legal experts in our community forum</p>
-                </a>
-                
-                <a href="wallet.php" class="action-card">
-                    <div class="action-icon">
-                        <i class="fas fa-wallet"></i>
-                    </div>
-                    <h3>Wallet</h3>
-                    <span class="action-card-label">Your Balance & History</span>
-                    <p>Manage your balance and view transaction history</p>
                 </a>
             `;
 
@@ -830,19 +821,19 @@
                 <i class="fas fa-home"></i>
                 <span>Home</span>
             </a>
-            <a href="experts.php" class="nav-item">
+            <a href="connect.php" class="nav-item">
                 <i class="fas fa-user-tie"></i>
                 <span>Connect</span>
             </a>
-            <a href="law_ai.php" class="nav-item center-ai">
+            <a href="aitool.php" class="nav-item center-ai">
                 <i class="fas fa-robot"></i>
                 <span>AI Tool</span>
             </a>
-            <a href="forum.php" class="nav-item">
+            <a href="community.php" class="nav-item">
                 <i class="fas fa-comments"></i>
                 <span>Community</span>
             </a>
-            <a href="sessions.php" class="nav-item">
+            <a href="profile.php" class="nav-item">
                 <i class="fas fa-user-circle"></i>
                 <span>Profile</span>
             </a>
