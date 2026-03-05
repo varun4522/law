@@ -1,7 +1,10 @@
 <?php
 require_once 'lib/db.php';
 if (isLoggedIn()) {
-    header('Location: mainhome.php');
+    $role = intval($_SESSION['role'] ?? 1);
+    if ($role === 2)      header('Location: expert/newpage.php');
+    elseif ($role === 3)  header('Location: admin/1newpage.php');
+    else                  header('Location: student/mainhome.php');
     exit;
 }
 ?>
