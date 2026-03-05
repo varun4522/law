@@ -794,15 +794,15 @@
 
         async function logout() {
             try {
-                const response = await fetch('lib/logout.php');
+                const response = await fetch('../lib/logout.php');
                 const result = await response.json();
                 
                 if (result.success) {
-                    window.location.href = 'index.php';
+                    window.location.href = '../index.php';
                 }
             } catch (error) {
                 console.error('Error logging out:', error);
-                window.location.href = 'index.php';
+                window.location.href = '../index.php';
             }
         }
 
