@@ -653,7 +653,7 @@
             <li><a href="#contact">Contact</a></li>
         </ul>
         <div class="cta-buttons">
-            <a href="login.php" class="btn-outline">Sign In</a>
+            <a href="signup.php" class="btn-outline">Sign Up</a>
             <a href="login.php" class="btn-primary">Get Started</a>
         </div>
     </div>
@@ -667,9 +667,6 @@
         <a href="login.php" class="btn-large btn-large-primary">
             <i class="fas fa-arrow-right" style="margin-right: 8px;"></i> Explore Services
         </a>
-        <button class="btn-large btn-large-secondary" onclick="alert('Demo video coming soon!')">
-            <i class="fas fa-video" style="margin-right: 8px;"></i> Watch Demo
-        </button>
     </div>
 </section>
 
