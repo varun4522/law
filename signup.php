@@ -14,7 +14,9 @@ if (isLoggedIn()) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up - Law Connectors</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -102,16 +104,17 @@ if (isLoggedIn()) {
         }
 
         .feature-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.15);
             display: flex;
             align-items: center;
             justify-content: center;
             margin-right: 18px;
             flex-shrink: 0;
-            font-size: 18px;
+            font-size: 24px;
+            color: #fff;
         }
 
         .feature-content h3 {
@@ -371,7 +374,7 @@ if (isLoggedIn()) {
             
             <div class="features">
                 <div class="feature-item">
-                    <div class="feature-icon">⚖️</div>
+                    <div class="feature-icon"><i class="fas fa-balance-scale"></i></div>
                     <div class="feature-content">
                         <h3>Expert Consultations</h3>
                         <p>Connect with verified legal experts for professional advice</p>
@@ -379,7 +382,7 @@ if (isLoggedIn()) {
                 </div>
                 
                 <div class="feature-item">
-                    <div class="feature-icon">📚</div>
+                    <div class="feature-icon"><i class="fas fa-book"></i></div>
                     <div class="feature-content">
                         <h3>Legal Resources</h3>
                         <p>Access comprehensive legal knowledge and community support</p>
@@ -387,7 +390,7 @@ if (isLoggedIn()) {
                 </div>
                 
                 <div class="feature-item">
-                    <div class="feature-icon">🔒</div>
+                    <div class="feature-icon"><i class="fas fa-lock"></i></div>
                     <div class="feature-content">
                         <h3>Secure Platform</h3>
                         <p>Your data and consultations are protected with enterprise security</p>
@@ -395,7 +398,7 @@ if (isLoggedIn()) {
                 </div>
                 
                 <div class="feature-item">
-                    <div class="feature-icon">⚡</div>
+                    <div class="feature-icon"><i class="fas fa-bolt"></i></div>
                     <div class="feature-content">
                         <h3>Instant Access</h3>
                         <p>Book sessions, chat with AI, and get answers immediately</p>
@@ -410,6 +413,7 @@ if (isLoggedIn()) {
                 <div class="form-header">
                     <h2>Create Account</h2>
                     <p>Start your legal journey with us</p>
+                    <div class="back-link" style="font-size: 13px; margin-top: 12px;"><a href="index.php" style="color: #0a0a0a; text-decoration: underline;">← Back to Home</a></div>
                 </div>
 
                 <div id="alertBox" class="alert"></div>
@@ -447,8 +451,8 @@ if (isLoggedIn()) {
                     <button type="submit">Create Account</button>
                 </form>
 
-                <div class="login-link">
-                    Already have an account? <a href="index.php">Sign in</a>
+                <div class="login-link" style="text-align: center; font-size: 15px; color: #666; margin-top: 24px;">
+                    Already have an account? <a href="login.php" style="color: #0a0a0a; font-weight: 600; text-decoration: underline; transition: color 0.2s;">Sign In</a>
                 </div>
             </div>
         </div>
