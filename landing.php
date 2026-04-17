@@ -653,8 +653,8 @@
             <li><a href="#contact">Contact</a></li>
         </ul>
         <div class="cta-buttons">
-            <a href="login.php" class="btn-outline">Sign In</a>
-            <a href="login.php" class="btn-primary">Get Started</a>
+            <button class="btn-outline">Sign In</button>
+            <button class="btn-primary">Get Started</button>
         </div>
     </div>
 </nav>
@@ -664,10 +664,10 @@
     <h1>Legal Expertise at Your Fingertips</h1>
     <p class="hero-subtitle">Connect with verified advocates, access AI-powered legal guidance, and manage all your consultations in one secure platform.</p>
     <div class="hero-buttons">
-        <a href="login.php" class="btn-large btn-large-primary">
+        <button class="btn-large btn-large-primary">
             <i class="fas fa-arrow-right" style="margin-right: 8px;"></i> Explore Services
-        </a>
-        <button class="btn-large btn-large-secondary" onclick="alert('Demo video coming soon!')">
+        </button>
+        <button class="btn-large btn-large-secondary">
             <i class="fas fa-video" style="margin-right: 8px;"></i> Watch Demo
         </button>
     </div>
@@ -847,8 +847,8 @@
     <h2>Ready to Get Legal Help?</h2>
     <p>Join thousands of satisfied clients who trust Law Connectors for their legal needs.</p>
     <div class="cta-buttons-section">
-        <a href="signup.php" class="btn-white">Sign Up Free</a>
-        <a href="#features" class="btn-white" style="background: transparent; border: 2px solid #fff; color: #fff;">Learn More</a>
+        <button class="btn-white">Sign Up Free</button>
+        <button class="btn-white" style="background: transparent; border: 2px solid #fff; color: #fff;">Learn More</button>
     </div>
 </section>
 
