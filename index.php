@@ -525,114 +525,386 @@
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
+            body {
+                background: #fff;
+            }
+
+            nav {
+                padding: 12px 0;
+                background: #fff;
+            }
+
             .navbar-container {
-                padding: 0 20px;
-                flex-direction: column;
-                gap: 16px;
+                padding: 0 16px;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                gap: 0;
+            }
+
+            .logo {
+                gap: 8px;
+                font-size: 20px;
+            }
+
+            .logo-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 18px;
             }
 
             .nav-links {
                 display: none;
+            }
+
+            .cta-buttons {
+                display: flex;
+                gap: 8px;
+                flex-direction: row;
+            }
+
+            .btn-outline, .btn-primary {
+                padding: 8px 14px;
+                font-size: 12px;
             }
 
             .hero {
-                padding: 60px 20px;
-            }
-
-            .features {
-                padding: 60px 20px;
-            }
-
-            .features-container {
-                grid-template-columns: 1fr;
-                gap: 24px;
-            }
-
-            .how-it-works {
-                padding: 60px 20px;
-            }
-
-            .service-item {
-                padding: 30px;
-                grid-template-columns: 1fr !important;
-                gap: 24px;
-            }
-
-            .service-features {
-                grid-template-columns: 1fr;
-            }
-
-            .services {
-                padding: 60px 20px;
-            }
-
-            .stats {
-                padding: 60px 20px;
-            }
-
-            .stats-container {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 40px;
-            }
-
-            .cta-section {
-                padding: 60px 20px;
-            }
-
-            footer {
-                padding: 40px 20px;
-            }
-
-            .footer-container {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 24px;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                gap: 16px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .nav-links {
-                display: none;
-            }
-
-            .section-title {
-                font-size: 24px;
+                padding: 40px 16px;
+                background: #fff;
             }
 
             .hero h1 {
-                font-size: 28px;
+                font-size: 32px;
+                margin-bottom: 16px;
+            }
+
+            .hero-subtitle {
+                font-size: 15px;
+                margin-bottom: 24px;
             }
 
             .hero-buttons {
                 flex-direction: column;
+                gap: 12px;
             }
 
             .btn-large {
+                padding: 14px 24px;
+                font-size: 14px;
                 width: 100%;
+            }
+
+            .features {
+                padding: 40px 16px;
+                background: #f5f5f5;
+            }
+
+            .section-title {
+                font-size: 26px;
+                margin-bottom: 12px;
+            }
+
+            .section-subtitle {
+                font-size: 14px;
+                margin-bottom: 32px;
+                max-width: 100%;
+            }
+
+            .features-container {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                max-width: 100%;
             }
 
             .feature-card {
                 padding: 24px 16px;
+                border-radius: 8px;
+                background: #fff;
+            }
+
+            .feature-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 24px;
+            }
+
+            .feature-card h3 {
+                font-size: 18px;
+                margin-bottom: 8px;
+            }
+
+            .feature-card p {
+                font-size: 13px;
+            }
+
+            .how-it-works {
+                padding: 40px 16px;
+                background: #fff;
+            }
+
+            .process-steps {
+                gap: 20px;
+                margin-top: 32px;
+            }
+
+            .step {
+                padding-left: 50px;
+            }
+
+            .step-number {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+
+            .step h4 {
+                font-size: 16px;
+                margin-bottom: 6px;
+            }
+
+            .step p {
+                font-size: 13px;
+            }
+
+            .services {
+                padding: 40px 16px;
+                background: #f5f5f5;
+            }
+
+            .services-container {
+                max-width: 100%;
             }
 
             .service-item {
-                padding: 20px;
+                padding: 24px 16px;
+                grid-template-columns: 1fr !important;
+                gap: 16px;
+                margin-bottom: 20px;
+                background: #fff;
+                border-radius: 8px;
+            }
+
+            .service-icon {
+                width: 80px;
+                height: 80px;
+                font-size: 36px;
+                margin: 0 auto;
+            }
+
+            .service-content h3 {
+                font-size: 20px;
+                margin-bottom: 12px;
+            }
+
+            .service-content p {
+                font-size: 14px;
+                margin-bottom: 12px;
+            }
+
+            .service-features {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .service-feature {
+                font-size: 13px;
+            }
+
+            .stats {
+                padding: 40px 16px;
+                background: #0a0a0a;
+            }
+
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
             }
 
             .stat-item h3 {
-                font-size: 36px;
+                font-size: 32px;
+                margin-bottom: 4px;
+            }
+
+            .stat-item p {
+                font-size: 12px;
+            }
+
+            .cta-section {
+                padding: 40px 16px;
+                background: #0a0a0a;
             }
 
             .cta-section h2 {
+                font-size: 28px;
+                margin-bottom: 16px;
+            }
+
+            .cta-section p {
+                font-size: 16px;
+                margin-bottom: 24px;
+            }
+
+            .cta-buttons-section {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .btn-white {
+                padding: 12px 24px;
+                font-size: 14px;
+                width: 100%;
+            }
+
+            footer {
+                padding: 32px 16px;
+                background: #1a1a1a;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .footer-section {
+                font-size: 13px;
+            }
+
+            .footer-section h4 {
+                font-size: 14px;
+                margin-bottom: 12px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 12px;
+                font-size: 12px;
+                border-top: 1px solid #333;
+                padding-top: 24px;
+            }
+
+            .social-links {
+                gap: 16px;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar-container {
+                padding: 0 12px;
+            }
+
+            .logo {
+                font-size: 18px;
+            }
+
+            .logo-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 16px;
+            }
+
+            .btn-outline, .btn-primary {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+
+            .hero {
+                padding: 32px 12px;
+            }
+
+            .hero h1 {
+                font-size: 26px;
+                margin-bottom: 12px;
+            }
+
+            .hero-subtitle {
+                font-size: 14px;
+            }
+
+            .btn-large {
+                padding: 12px 20px;
+                font-size: 13px;
+            }
+
+            .features {
+                padding: 32px 12px;
+            }
+
+            .section-title {
+                font-size: 22px;
+            }
+
+            .section-subtitle {
+                font-size: 13px;
+                margin-bottom: 24px;
+            }
+
+            .features-container {
+                gap: 12px;
+            }
+
+            .feature-card {
+                padding: 20px 12px;
+            }
+
+            .feature-card h3 {
+                font-size: 16px;
+            }
+
+            .feature-card p {
+                font-size: 12px;
+            }
+
+            .how-it-works {
+                padding: 32px 12px;
+            }
+
+            .service-item {
+                padding: 20px 12px;
+                margin-bottom: 16px;
+            }
+
+            .service-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 32px;
+            }
+
+            .service-content h3 {
+                font-size: 18px;
+            }
+
+            .service-content p {
+                font-size: 13px;
+            }
+
+            .stat-item h3 {
                 font-size: 28px;
             }
 
             .stats-container {
                 grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .cta-section {
+                padding: 32px 12px;
+            }
+
+            .cta-section h2 {
+                font-size: 24px;
+            }
+
+            .cta-section p {
+                font-size: 14px;
+            }
+
+            footer {
+                padding: 24px 12px;
+            }
+
+            .footer-container {
+                gap: 16px;
             }
         }
     </style>

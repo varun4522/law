@@ -474,7 +474,6 @@ if (isLoggedIn()) {
         <p>Connect with verified legal professionals, get instant AI-powered legal guidance, and manage all your consultations in one place.</p>
     </div>
     <div class="features">
-        <div class="feature-item"><div class="feature-dot"></div><span>Access 100+ verified legal experts across all practice areas</span></div>
         <div class="feature-item"><div class="feature-dot"></div><span>AI-powered legal assistant available 24/7 for instant answers</span></div>
         <div class="feature-item"><div class="feature-dot"></div><span>Anonymous community forum — ask lawyers freely</span></div>
         <div class="feature-item"><div class="feature-dot"></div><span>Secure session management and integrated wallet system</span></div>
