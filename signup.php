@@ -341,6 +341,43 @@ if (isLoggedIn()) {
             opacity: 0.7;
         }
 
+        /* Mobile Header - Hidden by default */
+        .mobile-header {
+            display: none;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            padding: 14px 16px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            width: 100%;
+        }
+
+        .mobile-header-brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .mobile-header-icon {
+            width: 30px;
+            height: 30px;
+            background: #fff;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: #0a0a0a;
+        }
+
+        .mobile-header-title {
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
         @media (max-width: 968px) {
             .left-panel {
                 display: none;
@@ -352,18 +389,155 @@ if (isLoggedIn()) {
             }
         }
 
+        @media (max-width: 768px) {
+            body {
+                background: #0a0a0a;
+                flex-direction: column;
+            }
+            .mobile-header {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                order: -1;
+            }
+            .container {
+                flex-direction: column;
+                background: #0a0a0a;
+                min-height: 100vh;
+            }
+            .left-panel {
+                display: none;
+            }
+            .right-panel {
+                padding: 24px 16px;
+                background: #0a0a0a;
+                flex: 1;
+                max-width: 100%;
+            }
+            .form-container {
+                max-width: 100%;
+            }
+            .form-header h2 {
+                font-size: 24px;
+                color: #fff;
+            }
+            .form-header p {
+                color: #aaa;
+                font-size: 13px;
+            }
+            .form-header .back-link a {
+                color: #888;
+            }
+            label {
+                color: #ccc;
+                font-size: 13px;
+            }
+            input[type="text"],
+            input[type="email"],
+            input[type="password"],
+            input[type="number"] {
+                background: #2a2a2a;
+                border: 1px solid #444;
+                color: #fff;
+                padding: 12px 14px;
+                font-size: 14px;
+            }
+            input:focus {
+                border-color: #fff;
+                box-shadow: 0 0 0 3px rgba(255,255,255,0.1);
+            }
+            input::placeholder {
+                color: #777;
+            }
+            .password-requirements {
+                background: #1a1a1a;
+                border-color: #333;
+            }
+            .requirement {
+                color: #aaa;
+            }
+            .requirement.met {
+                color: #4ade80;
+            }
+            .type-helper {
+                background: #1a1a1a;
+                border-left-color: #888;
+                color: #aaa;
+            }
+            .type-helper strong {
+                color: #fff;
+            }
+            button[type="submit"] {
+                padding: 12px 16px;
+                font-size: 14px;
+            }
+            .login-link {
+                color: #aaa;
+                font-size: 13px;
+            }
+            .login-link a {
+                color: #fff;
+            }
+        }
+
         @media (max-width: 640px) {
             .right-panel {
-                padding: 30px 20px;
+                padding: 20px 14px;
             }
             
             .form-header h2 {
-                font-size: 28px;
+                font-size: 22px;
+            }
+            .form-container {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .mobile-header-icon {
+                width: 28px;
+                height: 28px;
+                font-size: 14px;
+            }
+            .mobile-header-title {
+                font-size: 16px;
+            }
+            .right-panel {
+                padding: 16px 12px;
+            }
+            .form-header h2 {
+                font-size: 20px;
+                margin-bottom: 6px;
+            }
+            label {
+                font-size: 12px;
+                margin-bottom: 6px;
+            }
+            .form-group {
+                margin-bottom: 16px;
+            }
+            input[type="text"],
+            input[type="email"],
+            input[type="password"],
+            input[type="number"] {
+                padding: 11px 12px;
+                font-size: 13px;
+            }
+            button[type="submit"] {
+                padding: 11px 14px;
+                font-size: 13px;
             }
         }
     </style>
 </head>
 <body>
+    <div class="mobile-header">
+        <div class="mobile-header-brand">
+            <div class="mobile-header-icon"><i class="fas fa-balance-scale"></i></div>
+            <div class="mobile-header-title">Law Connectors</div>
+        </div>
+    </div>
+
     <div class="container">
         <!-- Left Panel -->
         <div class="left-panel">

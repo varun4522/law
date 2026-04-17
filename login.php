@@ -351,6 +351,42 @@ if (isLoggedIn()) {
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Mobile Header - Hidden by default */
+        .mobile-header {
+            display: none;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            padding: 16px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .mobile-header-brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .mobile-header-icon {
+            width: 32px;
+            height: 32px;
+            background: #fff;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: #0a0a0a;
+        }
+
+        .mobile-header-title {
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
         /* Tablet view */
         @media (max-width: 1024px) {
             body { grid-template-columns: 1fr; }
@@ -361,101 +397,131 @@ if (isLoggedIn()) {
 
         /* Mobile view */
         @media (max-width: 768px) {
-            body { grid-template-columns: 1fr; }
-            .left-panel { 
+            body { 
+                grid-template-columns: 1fr;
+                background: #0a0a0a;
                 display: flex;
-                padding: 30px 24px;
-                min-height: auto;
-                background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+                flex-direction: column;
             }
-            .left-panel::before,
-            .left-panel::after {
-                display: none;
+            .mobile-header {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 14px 16px;
+                order: -1;
             }
-            .brand { 
-                margin-bottom: 0;
-            }
-            .brand-icon {
-                width: 40px; 
-                height: 40px;
-            }
-            .brand-icon i { 
-                font-size: 20px;
-            }
-            .brand-name {
-                font-size: 18px;
-            }
-            .hero-text { 
-                display: none;
-            }
-            .features { 
+            .left-panel { 
                 display: none;
             }
             .right-panel { 
-                padding: 24px 20px; 
-                background: #fff;
+                padding: 24px 16px; 
+                background: #0a0a0a;
                 min-height: 100vh;
                 display: flex;
+                flex-direction: column;
                 align-items: center;
+                justify-content: center;
             }
             .form-card { 
-                border: none;
-                padding: 32px 20px;
-                box-shadow: none;
+                border: 1px solid #333;
+                padding: 28px 20px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.3);
                 max-width: 100%;
-                background: #fff;
+                background: #1a1a1a;
+                border-radius: 12px;
             }
             .form-header h2 {
-                font-size: 26px;
+                font-size: 24px;
+                color: #fff;
             }
             .form-header p {
-                font-size: 14px;
+                font-size: 13px;
+                color: #aaa;
+            }
+            .form-header .back-link a {
+                color: #888;
             }
             .form-group label {
                 font-size: 12px;
+                color: #ccc;
             }
             .form-group input {
-                padding: 13px 14px;
+                padding: 12px 14px;
                 font-size: 14px;
+                background: #2a2a2a;
+                border: 1px solid #444;
+                color: #fff;
+            }
+            .form-group input:focus {
+                border-color: #fff;
+                box-shadow: 0 0 0 3px rgba(255,255,255,0.1);
+            }
+            .form-group input::placeholder {
+                color: #777;
+            }
+            .remember-label {
+                color: #aaa;
+            }
+            .forgot-link {
+                color: #aaa;
+            }
+            .divider span {
+                color: #777;
+            }
+            .divider::before,
+            .divider::after {
+                background: #444;
+            }
+            .signup-link {
+                color: #aaa;
+            }
+            .signup-link a {
+                color: #fff;
             }
             .btn-primary {
-                padding: 13px 18px;
+                padding: 12px 16px;
                 font-size: 14px;
             }
         }
 
         /* Small mobile view */
         @media (max-width: 480px) {
-            .left-panel {
-                padding: 24px 16px;
-                justify-content: center;
+            .mobile-header {
+                padding: 12px 14px;
             }
-            .brand {
-                justify-content: center;
-                margin-bottom: 0;
+            .mobile-header-icon {
+                width: 28px;
+                height: 28px;
+                font-size: 14px;
+            }
+            .mobile-header-title {
+                font-size: 16px;
+            }
+            .right-panel {
+                padding: 16px 12px;
             }
             .form-card {
-                padding: 28px 16px;
+                padding: 24px 16px;
             }
             .form-header h2 {
-                font-size: 24px;
+                font-size: 22px;
             }
             .form-header { 
-                margin-bottom: 28px;
+                margin-bottom: 24px;
             }
             .form-group {
-                margin-bottom: 20px;
+                margin-bottom: 18px;
             }
             .remember-forgot {
                 flex-direction: column;
                 align-items: flex-start;
-                margin-bottom: 24px;
+                margin-bottom: 20px;
             }
             .remember-label {
-                font-size: 13px;
+                font-size: 12px;
             }
             .forgot-link {
-                font-size: 13px;
+                font-size: 12px;
                 width: 100%;
                 text-align: right;
             }
@@ -463,6 +529,13 @@ if (isLoggedIn()) {
     </style>
 </head>
 <body>
+
+<div class="mobile-header">
+    <div class="mobile-header-brand">
+        <div class="mobile-header-icon"><i class="fas fa-balance-scale"></i></div>
+        <div class="mobile-header-title">Law Connectors</div>
+    </div>
+</div>
 
 <div class="left-panel">
     <div class="brand">
