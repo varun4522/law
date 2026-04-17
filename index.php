@@ -677,9 +677,9 @@
     
     <div class="features-container">
         <div class="feature-card">
-            <div class="feature-icon"><i class="fas fa-users"></i></div>
-            <h3>100+ Verified Advocates</h3>
-            <p>Access a network of experienced legal professionals across all practice areas, verified and rated by our community.</p>
+            <div class="feature-icon"><i class="fas fa-video"></i></div>
+            <h3>One-on-One Advocate Sessions</h3>
+            <p>Book personal consultation sessions directly with experienced advocates. Get personalized legal advice tailored to your specific needs.</p>
         </div>
 
         <div class="feature-card">
@@ -706,11 +706,6 @@
             <p>Manage payments securely with our integrated wallet system. Flexible payment options and instant refunds.</p>
         </div>
 
-        <div class="feature-card">
-            <div class="feature-icon"><i class="fas fa-star"></i></div>
-            <h3>Quality Assured</h3>
-            <p>Every advocate is verified and reviewed. Client feedback ensures maintaining the highest quality standards.</p>
-        </div>
     </div>
 </section>
 
@@ -728,7 +723,6 @@
                     <div class="service-feature"><i class="fas fa-check"></i> Instant responses</div>
                     <div class="service-feature"><i class="fas fa-check"></i> Legal accuracy</div>
                     <div class="service-feature"><i class="fas fa-check"></i> 24/7 availability</div>
-                    <div class="service-feature"><i class="fas fa-check"></i> Multiple languages</div>
                 </div>
             </div>
         </div>
@@ -820,10 +814,6 @@
 <!-- Stats Section -->
 <section class="stats">
     <div class="stats-container">
-        <div class="stat-item">
-            <h3>100+</h3>
-            <p>Verified Advocates</p>
-        </div>
         <div class="stat-item">
             <h3>5,000+</h3>
             <p>Happy Clients</p>
