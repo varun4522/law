@@ -23,8 +23,8 @@ if (isLoggedIn()) {
         :root {
             --primary: #0a0a0a;
             --primary-light: #1a1a1a;
-            --accent: #1f3a5f;
-            --accent-hover: #2a4a7f;
+            --accent: #0a0a0a;
+            --accent-hover: #222;
             --bg-light: #f8f9fa;
             --text-dark: #0a0a0a;
             --text-muted: #6c757d;
@@ -35,7 +35,7 @@ if (isLoggedIn()) {
         
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--bg-light);
+            background: #f5f5f5;
             min-height: 100vh;
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -44,7 +44,7 @@ if (isLoggedIn()) {
 
         /* Left panel */
         .left-panel {
-            background: linear-gradient(135deg, #0f2d5c 0%, #0a0a0a 100%);
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -57,7 +57,7 @@ if (isLoggedIn()) {
             position: absolute;
             top: -100px; right: -100px;
             width: 350px; height: 350px;
-            border: 80px solid rgba(255,255,255,0.05);
+            border: 80px solid rgba(255,255,255,0.06);
             border-radius: 50%;
         }
         .left-panel::after {
@@ -65,7 +65,7 @@ if (isLoggedIn()) {
             position: absolute;
             bottom: -80px; left: -80px;
             width: 250px; height: 250px;
-            border: 60px solid rgba(255,255,255,0.05);
+            border: 60px solid rgba(255,255,255,0.06);
             border-radius: 50%;
         }
         .brand { 
@@ -77,14 +77,14 @@ if (isLoggedIn()) {
         }
         .brand-icon {
             width: 48px; height: 48px;
-            background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
+            background: #fff;
             border-radius: 10px;
             display: flex; 
             align-items: center; 
             justify-content: center;
             box-shadow: 0 4px 12px rgba(255,255,255,0.1);
         }
-        .brand-icon i { color: #0f2d5c; font-size: 24px; }
+        .brand-icon i { color: #0a0a0a; font-size: 24px; }
         .brand-name {
             font-family: 'Playfair Display', serif;
             font-size: 22px; 
@@ -103,11 +103,11 @@ if (isLoggedIn()) {
         }
         .hero-text h1 em { 
             font-style: italic; 
-            color: #a8d5ff;
+            color: #d0d0d0;
         }
         .hero-text p { 
             font-size: 16px; 
-            color: #d0d0d0; 
+            color: #c0c0c0; 
             line-height: 1.8; 
             max-width: 420px;
             font-weight: 300;
@@ -122,14 +122,14 @@ if (isLoggedIn()) {
         .feature-dot {
             width: 6px; 
             height: 6px; 
-            background: #a8d5ff; 
+            background: #fff; 
             border-radius: 50%;
             margin-top: 8px; 
             flex-shrink: 0;
         }
         .feature-item span { 
             font-size: 14px; 
-            color: #d0d0d0; 
+            color: #b0b0b0; 
             line-height: 1.6;
             font-weight: 300;
         }
@@ -140,11 +140,11 @@ if (isLoggedIn()) {
             align-items: center; 
             justify-content: center;
             padding: 40px; 
-            background: linear-gradient(to bottom, #f8f9fa, #ffffff);
+            background: #fff;
         }
         .form-card {
             background: #fff;
-            border: 1px solid #e8eaed;
+            border: 1px solid #e8e8e8;
             border-radius: 8px;
             padding: 48px 44px;
             width: 100%; 
@@ -156,12 +156,12 @@ if (isLoggedIn()) {
             font-family: 'Playfair Display', serif;
             font-size: 32px; 
             font-weight: 700; 
-            color: var(--text-dark); 
+            color: #0a0a0a; 
             margin-bottom: 8px;
         }
         .form-header p { 
             font-size: 15px; 
-            color: var(--text-muted);
+            color: #666;
             font-weight: 300;
         }
         .form-group { margin-bottom: 24px; }
@@ -169,7 +169,7 @@ if (isLoggedIn()) {
             display: block; 
             font-size: 13px; 
             font-weight: 600; 
-            color: var(--text-dark);
+            color: #0a0a0a;
             text-transform: uppercase; 
             letter-spacing: 0.6px; 
             margin-bottom: 10px;
@@ -177,24 +177,24 @@ if (isLoggedIn()) {
         .form-group input {
             width: 100%; 
             padding: 14px 16px;
-            border: 1.5px solid #e0e0e0; 
+            border: 1.5px solid #d0d0d0; 
             border-radius: 6px;
             font-family: 'Inter', sans-serif; 
             font-size: 15px; 
-            color: #111;
+            color: #0a0a0a;
             background: #fff; 
             transition: all 0.3s ease;
         }
         .form-group input:hover {
-            border-color: #d0d0d0;
+            border-color: #999;
         }
         .form-group input:focus {
             outline: none; 
-            border-color: var(--accent);
-            box-shadow: 0 0 0 4px rgba(31, 58, 95, 0.1);
+            border-color: #0a0a0a;
+            box-shadow: 0 0 0 4px rgba(10, 10, 10, 0.1);
         }
         .form-group input::placeholder { 
-            color: #b0b0b0;
+            color: #aaa;
         }
         .remember-forgot {
             display: flex; 
@@ -208,31 +208,33 @@ if (isLoggedIn()) {
             align-items: center; 
             gap: 8px;
             font-size: 14px; 
-            color: var(--text-muted); 
+            color: #555; 
             cursor: pointer;
             font-weight: 500;
         }
         .remember-label input[type="checkbox"] { 
             width: 16px; 
             height: 16px; 
-            accent-color: var(--accent); 
+            accent-color: #0a0a0a; 
             cursor: pointer;
             border-radius: 3px;
         }
         .forgot-link {
             font-size: 14px; 
-            color: var(--accent); 
+            color: #0a0a0a; 
             text-decoration: none;
             font-weight: 500;
             transition: all 0.2s;
+            border-bottom: 1px solid transparent;
         }
         .forgot-link:hover { 
-            color: var(--accent-hover);
+            color: #333;
+            border-bottom-color: #0a0a0a;
         }
         .btn-primary {
             width: 100%; 
             padding: 14px 20px; 
-            background: linear-gradient(135deg, var(--accent) 0%, #1a2d47 100%);
+            background: #0a0a0a;
             color: #fff;
             border: none; 
             border-radius: 6px;
@@ -246,11 +248,11 @@ if (isLoggedIn()) {
             align-items: center; 
             justify-content: center; 
             gap: 10px;
-            box-shadow: 0 2px 8px rgba(31, 58, 95, 0.2);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         }
         .btn-primary:hover { 
-            background: linear-gradient(135deg, var(--accent-hover) 0%, #213452 100%);
-            box-shadow: 0 4px 12px rgba(31, 58, 95, 0.3);
+            background: #222;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
             transform: translateY(-1px);
         }
         .btn-primary:active { 
@@ -271,27 +273,28 @@ if (isLoggedIn()) {
             content: ''; 
             flex: 1; 
             height: 1px; 
-            background: #e8eaed;
+            background: #e0e0e0;
         }
         .divider span { 
             font-size: 13px; 
-            color: var(--text-muted); 
+            color: #999; 
             white-space: nowrap;
             font-weight: 500;
         }
         .signup-link { 
             text-align: center; 
             font-size: 15px; 
-            color: var(--text-muted);
+            color: #666;
         }
         .signup-link a {
-            color: var(--accent); 
+            color: #0a0a0a; 
             font-weight: 600; 
             text-decoration: none;
+            border-bottom: 1.5px solid #0a0a0a;
             transition: color 0.2s;
         }
         .signup-link a:hover { 
-            color: var(--accent-hover);
+            color: #333;
         }
         .alert {
             padding: 14px 16px; 
@@ -305,19 +308,19 @@ if (isLoggedIn()) {
         .alert.success { 
             background: #ecf9f3; 
             color: #155e4c; 
-            border-left-color: var(--success);
+            border-left-color: #27ae60;
             display: block;
         }
         .alert.error { 
             background: #fadad9; 
             color: #78241c; 
-            border-left-color: var(--error);
+            border-left-color: #e74c3c;
             display: block;
         }
         .loading { 
             display: none; 
             text-align: center; 
-            color: var(--text-muted); 
+            color: #666; 
             font-size: 14px; 
             margin-bottom: 16px;
         }
@@ -326,7 +329,7 @@ if (isLoggedIn()) {
             width: 18px; 
             height: 18px;
             border: 2.5px solid #e0e0e0; 
-            border-top-color: var(--accent);
+            border-top-color: #0a0a0a;
             border-radius: 50%; 
             animation: spin 0.8s linear infinite;
             margin-right: 8px; 
@@ -355,7 +358,7 @@ if (isLoggedIn()) {
                 display: flex;
                 padding: 30px 24px;
                 min-height: auto;
-                background: linear-gradient(135deg, #0f2d5c 0%, #0a0a0a 100%);
+                background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
             }
             .left-panel::before,
             .left-panel::after {
