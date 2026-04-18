@@ -27,11 +27,12 @@ if (!$pdo) {
 
 try {
     // Find user by email
-    $stmt = $pdo->prepare("SELECT id, email, password, full_name, role FROM users WHERE email = ?");
+    $stmt = $pdo->prepare("SELECT id, email, plain_password, full_name, role FROM users WHERE email = ?");
     $stmt->execute([$email]);
     $user = $stmt->fetch();
     
-    if (!$user || !password_verify($password, $user['password'])) {
+    // Compare plain passwords (no hashing)
+    if (!$user || $password !== $user['plain_password']) {
         sendErrorResponse('Invalid email or password', 401);
     }
     

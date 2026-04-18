@@ -391,31 +391,61 @@ if (isLoggedIn()) {
 
         @media (max-width: 768px) {
             body {
-                background: #0a0a0a;
+                background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
                 flex-direction: column;
+                position: relative;
+                overflow-x: hidden;
+            }
+            body::before {
+                content: '';
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: 
+                    radial-gradient(circle at 20% 50%, rgba(255,255,255,0.08) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 80%, rgba(255,255,255,0.06) 0%, transparent 50%),
+                    radial-gradient(circle at 40% 0%, rgba(255,255,255,0.05) 0%, transparent 50%);
+                pointer-events: none;
+                z-index: 0;
             }
             .mobile-header {
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 order: -1;
+                position: relative;
+                z-index: 10;
+                box-shadow: 0 4px 16px rgba(0,0,0,0.4);
             }
             .container {
                 flex-direction: column;
-                background: #0a0a0a;
+                background: transparent;
                 min-height: 100vh;
+                position: relative;
+                z-index: 1;
             }
             .left-panel {
                 display: none;
             }
             .right-panel {
                 padding: 24px 16px;
-                background: #0a0a0a;
+                background: transparent;
                 flex: 1;
                 max-width: 100%;
+                position: relative;
+                z-index: 2;
             }
             .form-container {
                 max-width: 100%;
+                background: #1a1a1a;
+                padding: 28px 20px;
+                border-radius: 14px;
+                border: 1.5px solid #444;
+                box-shadow: 
+                    0 8px 32px rgba(0,0,0,0.4),
+                    inset 0 1px 0 rgba(255,255,255,0.1);
             }
             .form-header h2 {
                 font-size: 24px;
@@ -476,7 +506,7 @@ if (isLoggedIn()) {
                 font-size: 13px;
             }
             .login-link a {
-                color: #fff;
+                color: #fff !important;
             }
         }
 
@@ -487,9 +517,6 @@ if (isLoggedIn()) {
             
             .form-header h2 {
                 font-size: 22px;
-            }
-            .form-container {
-                max-width: 100%;
             }
         }
 

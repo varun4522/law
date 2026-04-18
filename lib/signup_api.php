@@ -57,12 +57,12 @@ try {
         sendErrorResponse('An account with this email already exists');
     }
 
-    // Hash password
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    // Store password as plain text (no hashing)
+    $plainPassword = $password;
 
     // Insert new user
-    $stmt = $pdo->prepare("INSERT INTO users (email, password, full_name, role) VALUES (?, ?, ?, ?)");
-    $stmt->execute([$email, $hashedPassword, $fullName, $role]);
+    $stmt = $pdo->prepare("INSERT INTO users (email, plain_password, full_name, role) VALUES (?, ?, ?, ?)");
+    $stmt->execute([$email, $plainPassword, $fullName, $role]);
     $userId = $pdo->lastInsertId();
 
     // Start session and log the user in immediately

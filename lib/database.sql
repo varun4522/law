@@ -8,7 +8,7 @@ USE law;
 CREATE TABLE IF NOT EXISTS users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   email VARCHAR(255) NOT NULL UNIQUE,
-  password VARCHAR(255) NOT NULL,
+  plain_password VARCHAR(255) NOT NULL,
   full_name VARCHAR(255),
   phone VARCHAR(20),
   `role` TINYINT NOT NULL DEFAULT 1 COMMENT '1=student 2=expert 3=admin',
