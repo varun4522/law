@@ -5,12 +5,16 @@ requireAuth();
 // Fetch experts from database
 $pdo = getDBConnection();
 $experts = [];
+$dbError = null;
 
 if ($pdo) {
     try {
+        // Query to get all verified experts with their user information
         $query = "SELECT 
             ep.id,
-            u.name,
+            u.id as user_id,
+            u.full_name as name,
+            u.name as username,
             ep.specialization,
             ep.experience_years,
             ep.hourly_rate,
@@ -21,44 +25,40 @@ if ($pdo) {
             ep.language,
             ep.probono_participation,
             u.bio,
+            u.phone,
             u.profile_image
         FROM expert_profiles ep
-        JOIN users u ON ep.user_id = u.id
-        WHERE ep.verification_status = 'verified'
-        ORDER BY ep.rating DESC";
+        INNER JOIN users u ON ep.user_id = u.id
+        WHERE ep.verification_status = 'verified' AND u.role = 'expert'
+        ORDER BY ep.rating DESC, ep.total_sessions DESC";
         
         $stmt = $pdo->prepare($query);
         $stmt->execute();
         $dbExperts = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
         // Format data for JavaScript
-        foreach ($dbExperts as $expert) {
-            $experts[] = [
-                'id' => $expert['id'],
-                'name' => $expert['name'] ?? 'Legal Expert',
-                'spec' => $expert['specialization'] ?? 'General Law',
-                'exp' => (int)($expert['experience_years'] ?? 0),
-                'rating' => (float)($expert['rating'] ?? 0),
-                'reviews' => (int)($expert['total_reviews'] ?? 0),
-                'sessions' => (int)($expert['total_sessions'] ?? 0),
-                'fee' => (int)($expert['hourly_rate'] ?? 500),
-                'avail' => ($expert['availability_status'] === 'available') ? 'available' : 'busy',
-                'probono' => (bool)$expert['probono_participation'],
-                'bio' => $expert['bio'] ?? 'Expert in legal matters.',
-                'tags' => array_filter(array_map('trim', explode(',', $expert['specialization'] ?? '')))
-            ];
+        if ($dbExperts && count($dbExperts) > 0) {
+            foreach ($dbExperts as $expert) {
+                $experts[] = [
+                    'id' => (int)$expert['id'],
+                    'name' => $expert['name'] ?: $expert['username'] ?: 'Legal Expert',
+                    'spec' => $expert['specialization'] ?: 'General Law',
+                    'exp' => (int)($expert['experience_years'] ?: 0),
+                    'rating' => (float)($expert['rating'] ?: 0),
+                    'reviews' => (int)($expert['total_reviews'] ?: 0),
+                    'sessions' => (int)($expert['total_sessions'] ?: 0),
+                    'fee' => (int)($expert['hourly_rate'] ?: 500),
+                    'avail' => ($expert['availability_status'] === 'available') ? 'available' : 'busy',
+                    'probono' => (bool)$expert['probono_participation'],
+                    'bio' => $expert['bio'] ?: 'Expert in legal matters.',
+                    'tags' => [$expert['specialization']] ?: ['Law']
+                ];
+            }
         }
     } catch(Exception $e) {
-        error_log("Error fetching experts: " . $e->getMessage());
+        $dbError = $e->getMessage();
+        error_log("Error fetching experts: " . $dbError);
     }
-}
-
-// If no experts found, use sample data
-if (empty($experts)) {
-    $experts = [
-        ['id'=>1,'name'=>'Adv. Priya Sharma','spec'=>'Family Law','exp'=>12,'rating'=>4.9,'reviews'=>214,'sessions'=>430,'fee'=>800,'avail'=>'available','probono'=>true,'bio'=>'Senior advocate with 12 years specializing in family matters.','tags'=>['Family Law']],
-        ['id'=>2,'name'=>'Adv. Rahul Verma','spec'=>'Criminal Law','exp'=>8,'rating'=>4.7,'reviews'=>132,'sessions'=>289,'fee'=>1200,'avail'=>'available','probono'=>false,'bio'=>'Former public prosecutor turned defense attorney.','tags'=>['Criminal Law']],
-    ];
 }
 ?>
 <!DOCTYPE html>
@@ -187,6 +187,21 @@ if (empty($experts)) {
                 <option value="busy">Busy</option>
             </select>
         </div>
+
+        <?php if ($dbError): ?>
+            <div style="background:#fee;border:1px solid #faa;border-radius:4px;padding:16px;margin-bottom:20px;color:#c00;">
+                <strong>Database Error:</strong> <?php echo htmlspecialchars($dbError); ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if (empty($experts)): ?>
+            <div style="background:#f0f9ff;border:1px solid #7dd3fc;border-radius:4px;padding:32px;text-align:center;margin-bottom:20px;">
+                <i class="fas fa-database" style="font-size:40px;color:#0284c7;margin-bottom:16px;display:block;"></i>
+                <strong style="display:block;margin-bottom:8px;font-size:16px;color:#0c2340;">No Experts Available</strong>
+                <p style="color:#666;margin-bottom:16px;font-size:14px;">To populate the database with expert profiles, run:</p>
+                <code style="background:#fff;border:1px solid #cbd5e1;padding:12px;border-radius:4px;display:inline-block;font-family:monospace;">php lib/seed_experts.php</code>
+            </div>
+        <?php endif; ?>
 
         <div class="experts-grid" id="expertsGrid"></div>
     </div>
