@@ -1,10 +1,86 @@
-<?php require_once __DIR__ . '/../lib/db.php'; requireAuth(); ?>
+<?php
+require_once __DIR__ . '/../lib/db.php';
+$student = requireAuth();
+if ($student['role'] != ROLE_STUDENT) {
+    header('Location: ../index.php');
+    exit;
+}
+
+$pdo = getDBConnection();
+$userId = $student['id'];
+$message = '';
+$error = '';
+
+// Handle form submissions
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $action = $_POST['action'] ?? '';
+
+    if ($action === 'update_profile') {
+        try {
+            $stmt = $pdo->prepare("
+                UPDATE users 
+                SET full_name = ?, email = ?, phone = ?, address = ?, city = ?, state = ?, pincode = ?
+                WHERE id = ?
+            ");
+            $stmt->execute([
+                $_POST['full_name'],
+                $_POST['email'],
+                $_POST['phone'],
+                $_POST['address'],
+                $_POST['city'],
+                $_POST['state'],
+                $_POST['pincode'],
+                $userId
+            ]);
+            $message = 'Profile updated successfully!';
+            
+            // Reload student data
+            $_SESSION['user'] = array_merge($_SESSION['user'], [
+                'full_name' => $_POST['full_name'],
+                'email' => $_POST['email'],
+                'phone' => $_POST['phone']
+            ]);
+            $student = $_SESSION['user'];
+        } catch (Exception $e) {
+            $error = 'Error updating profile: ' . $e->getMessage();
+        }
+    } elseif ($action === 'change_password') {
+        $oldPassword = $_POST['old_password'];
+        $newPassword = $_POST['new_password'];
+        $confirmPassword = $_POST['confirm_password'];
+
+        if ($newPassword !== $confirmPassword) {
+            $error = 'Passwords do not match';
+        } elseif (strlen($newPassword) < 6) {
+            $error = 'Password must be at least 6 characters';
+        } else {
+            // Verify old password
+            if (!password_verify($oldPassword, $student['password'])) {
+                $error = 'Current password is incorrect';
+            } else {
+                try {
+                    $stmt = $pdo->prepare("UPDATE users SET password = ? WHERE id = ?");
+                    $stmt->execute([password_hash($newPassword, PASSWORD_BCRYPT), $userId]);
+                    $message = 'Password changed successfully!';
+                } catch (Exception $e) {
+                    $error = 'Error changing password: ' . $e->getMessage();
+                }
+            }
+        }
+    }
+}
+
+// Get profile data
+$stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
+$stmt->execute([$userId]);
+$profile = $stmt->fetch();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Profile - Law Connectors</title>
+    <title>My Profile - LawConnect</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
