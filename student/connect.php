@@ -1,4 +1,66 @@
-<?php require_once __DIR__ . '/../lib/db.php'; requireAuth(); ?>
+<?php 
+require_once __DIR__ . '/../lib/db.php'; 
+requireAuth();
+
+// Fetch experts from database
+$pdo = getDBConnection();
+$experts = [];
+
+if ($pdo) {
+    try {
+        $query = "SELECT 
+            ep.id,
+            u.name,
+            ep.specialization,
+            ep.experience_years,
+            ep.hourly_rate,
+            ep.rating,
+            ep.total_reviews,
+            ep.total_sessions,
+            ep.availability_status,
+            ep.language,
+            ep.probono_participation,
+            u.bio,
+            u.profile_image
+        FROM expert_profiles ep
+        JOIN users u ON ep.user_id = u.id
+        WHERE ep.verification_status = 'verified'
+        ORDER BY ep.rating DESC";
+        
+        $stmt = $pdo->prepare($query);
+        $stmt->execute();
+        $dbExperts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        // Format data for JavaScript
+        foreach ($dbExperts as $expert) {
+            $experts[] = [
+                'id' => $expert['id'],
+                'name' => $expert['name'] ?? 'Legal Expert',
+                'spec' => $expert['specialization'] ?? 'General Law',
+                'exp' => (int)($expert['experience_years'] ?? 0),
+                'rating' => (float)($expert['rating'] ?? 0),
+                'reviews' => (int)($expert['total_reviews'] ?? 0),
+                'sessions' => (int)($expert['total_sessions'] ?? 0),
+                'fee' => (int)($expert['hourly_rate'] ?? 500),
+                'avail' => ($expert['availability_status'] === 'available') ? 'available' : 'busy',
+                'probono' => (bool)$expert['probono_participation'],
+                'bio' => $expert['bio'] ?? 'Expert in legal matters.',
+                'tags' => array_filter(array_map('trim', explode(',', $expert['specialization'] ?? '')))
+            ];
+        }
+    } catch(Exception $e) {
+        error_log("Error fetching experts: " . $e->getMessage());
+    }
+}
+
+// If no experts found, use sample data
+if (empty($experts)) {
+    $experts = [
+        ['id'=>1,'name'=>'Adv. Priya Sharma','spec'=>'Family Law','exp'=>12,'rating'=>4.9,'reviews'=>214,'sessions'=>430,'fee'=>800,'avail'=>'available','probono'=>true,'bio'=>'Senior advocate with 12 years specializing in family matters.','tags'=>['Family Law']],
+        ['id'=>2,'name'=>'Adv. Rahul Verma','spec'=>'Criminal Law','exp'=>8,'rating'=>4.7,'reviews'=>132,'sessions'=>289,'fee'=>1200,'avail'=>'available','probono'=>false,'bio'=>'Former public prosecutor turned defense attorney.','tags'=>['Criminal Law']],
+    ];
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -171,16 +233,8 @@
     </nav>
 
     <script>
-        const experts = [
-            {id:1,name:'Adv. Priya Sharma',spec:'Family Law',exp:12,rating:4.9,reviews:214,sessions:430,fee:800,avail:'available',probono:true,tags:['Divorce','Child Custody','Inheritance','Matrimonial'],bio:'Senior advocate with 12 years specializing in family matters and matrimonial disputes.'},
-            {id:2,name:'Adv. Rahul Verma',spec:'Criminal Law',exp:8,rating:4.7,reviews:132,sessions:289,fee:1200,avail:'available',probono:false,tags:['Bail Applications','Trial Defense','FIR Quashing','CRPC'],bio:'Former public prosecutor turned defense attorney. Expert in criminal trial procedures.'},
-            {id:3,name:'Adv. Anjali Nair',spec:'Property Law',exp:15,rating:4.8,reviews:298,sessions:612,fee:900,avail:'busy',probono:false,tags:['RERA','Property Disputes','Title Verification','Agreement Draft'],bio:'Specialist in real estate law including RERA disputes and property documentation.'},
-            {id:4,name:'Adv. Suresh Patel',spec:'Corporate Law',exp:10,rating:4.6,reviews:87,sessions:194,fee:1500,avail:'available',probono:false,tags:['Company Formation','Contracts','IP Rights','Mergers'],bio:'Corporate lawyer helping startups and established companies with legal structures.'},
-            {id:5,name:'Adv. Meera Joshi',spec:'Consumer Law',exp:6,rating:4.8,reviews:167,sessions:321,fee:600,avail:'available',probono:true,tags:['Consumer Forum','Deficiency of Service','RERA','Ecommerce'],bio:'Champion of consumer rights with high success rate at National Consumer Forum.'},
-            {id:6,name:'Adv. Karthik Rajan',spec:'Labour Law',exp:9,rating:4.5,reviews:104,sessions:215,fee:700,avail:'busy',probono:false,tags:['Employment Law','Wrongful Termination','PF & ESIC','Industrial Disputes'],bio:'Specializes in employment rights, labour disputes and industrial tribunal cases.'},
-            {id:7,name:'Adv. Deepa Choudhary',spec:'Civil Law',exp:18,rating:4.9,reviews:341,sessions:820,fee:1100,avail:'available',probono:true,tags:['Civil Suits','Injunctions','Recovery Cases','Cheque Bounce'],bio:'One of the most experienced civil litigators. Has argued cases at High Court level.'},
-            {id:8,name:'Adv. Arun Mishra',spec:'Criminal Law',exp:5,rating:4.4,reviews:56,sessions:98,fee:650,avail:'available',probono:true,tags:['Bail','Section 498A','Cyber Crime','POCSO'],bio:'Young and dynamic criminal defence lawyer focused on digital & cyber crime cases.'},
-        ];
+        // Experts data from database
+        const experts = <?php echo json_encode($experts); ?>;
 
         let filtered = [...experts];
 
@@ -246,11 +300,39 @@
 
         function submitBooking() {
             const date  = document.getElementById('bookDate').value;
+            const time  = document.getElementById('bookTime').value;
             const issue = document.getElementById('bookIssue').value.trim();
             if (!date || !issue) { alert('Please fill in the date and describe your issue.'); return; }
-            document.getElementById('bookSuccess').style.display = 'block';
-            document.getElementById('bookForm').querySelector('.modal-actions').style.display = 'none';
-            setTimeout(closeBookModal, 2500);
+            
+            // Find expert ID by name
+            const expert = experts.find(e => e.name === currentExpert);
+            if (!expert) { alert('Expert not found.'); return; }
+            
+            // Send booking to server
+            fetch('../lib/book_session.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    expert_id: expert.id,
+                    session_date: date + ' ' + time,
+                    duration: 60,
+                    notes: issue
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('bookSuccess').style.display = 'block';
+                    document.getElementById('bookForm').querySelector('.modal-actions').style.display = 'none';
+                    setTimeout(closeBookModal, 2500);
+                } else {
+                    alert('Error: ' + (data.message || 'Booking failed'));
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                alert('Booking error. Please try again.');
+            });
         }
 
         async function logout() {
