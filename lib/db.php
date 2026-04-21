@@ -6,6 +6,11 @@ define('DB_NAME', 'law');
 define('DB_USER', 'law');
 define('DB_PASS', 'law');
 
+// Role Constants (Numeric)
+define('ROLE_STUDENT', 1);  // Student/User (default)
+define('ROLE_EXPERT', 2);   // Legal Expert
+define('ROLE_ADMIN', 3);    // Administrator
+
 // Create database connection
 function getDBConnection() {
     try {
@@ -73,6 +78,44 @@ function requireAuth() {
         }
     }
     return getCurrentUser();
+}
+
+// Require specific role
+function requireRole($requiredRole) {
+    $user = requireAuth();
+    $userRole = (int)($user['role'] ?? ROLE_STUDENT);
+    
+    if ($userRole !== $requiredRole) {
+        http_response_code(403);
+        die('Access Denied: Insufficient Permissions');
+    }
+    
+    return $user;
+}
+
+// Get human-readable role name
+function getRoleName($role) {
+    $role = (int)$role;
+    $roles = [
+        ROLE_STUDENT => 'Student',
+        ROLE_EXPERT => 'Expert',
+        ROLE_ADMIN => 'Administrator'
+    ];
+    return $roles[$role] ?? 'Unknown';
+}
+
+// Get redirect URL based on role
+function getRedirectUrlByRole($role) {
+    $role = (int)$role;
+    switch ($role) {
+        case ROLE_EXPERT:
+            return 'expert/newpage.php';
+        case ROLE_ADMIN:
+            return 'admin/1newpage.php';
+        case ROLE_STUDENT:
+        default:
+            return 'student/mainhome.php';
+    }
 }
 
 // Set JSON header

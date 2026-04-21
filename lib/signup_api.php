@@ -69,7 +69,7 @@ try {
     startSession();
     $_SESSION['user_id'] = $userId;
     $_SESSION['email']   = $email;
-    $_SESSION['role']    = $role;
+    $_SESSION['role']    = (int)$role;  // Ensure numeric role
 
     sendSuccessResponse([
         'user' => [

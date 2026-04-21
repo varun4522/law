@@ -157,25 +157,27 @@ try {
         $user = $checkStmt->fetch();
         
         if (!$user) {
-            // Create user if doesn't exist
+            // Create user if doesn't exist - role 2 = expert
             $userStmt = $pdo->prepare("
-                INSERT INTO users (email, password, full_name, name, role, phone, bio, created_at)
-                VALUES (?, ?, ?, ?, ?, ?, ?, NOW())
+                INSERT INTO users (email, password, full_name, name, role, phone, bio, status, created_at)
+                VALUES (?, ?, ?, ?, 2, ?, ?, 'active', NOW())
             ");
             $userStmt->execute([
                 $expert['email'],
                 $expert['password'],
                 $expert['full_name'],
                 $expert['name'],
-                $expert['role'],
                 $expert['phone'],
                 $expert['bio']
             ]);
             $userId = $pdo->lastInsertId();
-            echo "✓ Created user: {$expert['full_name']} (ID: $userId)\n";
+            echo "✓ Created user: {$expert['full_name']} (ID: $userId, Role: 2-Expert)\n";
         } else {
             $userId = $user['id'];
-            echo "→ User exists: {$expert['full_name']} (ID: $userId)\n";
+            // Ensure role is set to expert (2)
+            $updateStmt = $pdo->prepare("UPDATE users SET role = 2, status = 'active' WHERE id = ?");
+            $updateStmt->execute([$userId]);
+            echo "→ User exists: {$expert['full_name']} (ID: $userId, Role: 2-Expert)\n";
         }
         
         // Check if expert profile exists

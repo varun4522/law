@@ -15,6 +15,8 @@ if ($pdo) {
             u.id as user_id,
             u.full_name as name,
             u.name as username,
+            u.email,
+            u.role,
             ep.specialization,
             ep.experience_years,
             ep.hourly_rate,
@@ -29,7 +31,9 @@ if ($pdo) {
             u.profile_image
         FROM expert_profiles ep
         INNER JOIN users u ON ep.user_id = u.id
-        WHERE ep.verification_status = 'verified' AND u.role = 'expert'
+        WHERE ep.verification_status = 'verified' 
+        AND u.role = 2
+        AND u.status = 'active'
         ORDER BY ep.rating DESC, ep.total_sessions DESC";
         
         $stmt = $pdo->prepare($query);
