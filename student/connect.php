@@ -14,7 +14,7 @@ if ($pdo) {
             ep.id,
             u.id as user_id,
             u.full_name as name,
-            u.name as username,
+            u.full_name as username,
             u.email,
             u.role,
             ep.specialization,

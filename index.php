@@ -921,6 +921,7 @@
         <ul class="nav-links">
             <li><a href="#features">Features</a></li>
             <li><a href="#services">Services</a></li>
+            <li><a href="chat.php">Lexi AI</a></li>
             <li><a href="#how">How It Works</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
@@ -996,6 +997,7 @@
                     <div class="service-feature"><i class="fas fa-check"></i> Legal accuracy</div>
                     <div class="service-feature"><i class="fas fa-check"></i> 24/7 availability</div>
                 </div>
+                <a href="chat.php" class="btn-primary" style="display:inline-block; margin-top:20px;">Try Lexi AI Now</a>
             </div>
         </div>
 
@@ -1128,7 +1130,7 @@
         <div class="footer-section">
             <h4>Services</h4>
             <ul>
-                <li><a href="#">AI Legal Assistant</a></li>
+                <li><a href="chat.php">AI Legal Assistant</a></li>
                 <li><a href="#">Find Advocates</a></li>
                 <li><a href="#">Community Forum</a></li>
                 <li><a href="#">Document Review</a></li>

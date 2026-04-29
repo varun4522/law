@@ -159,14 +159,13 @@ try {
         if (!$user) {
             // Create user if doesn't exist - role 2 = expert
             $userStmt = $pdo->prepare("
-                INSERT INTO users (email, password, full_name, name, role, phone, bio, status, created_at)
-                VALUES (?, ?, ?, ?, 2, ?, ?, 'active', NOW())
+                INSERT INTO users (email, plain_password, full_name, role, phone, bio, status, created_at)
+                VALUES (?, ?, ?, 2, ?, ?, 'active', NOW())
             ");
             $userStmt->execute([
                 $expert['email'],
-                $expert['password'],
+                $expert['password'], // Storing the hash in plain_password because that's the only password field available
                 $expert['full_name'],
-                $expert['name'],
                 $expert['phone'],
                 $expert['bio']
             ]);
