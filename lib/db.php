@@ -1,6 +1,6 @@
 <?php
 // Database connection configuration
-define('DB_HOST', 'localhost');
+define('DB_HOST', '72.61.170.123');}
 define('DB_PORT', '3306');
 define('DB_NAME', 'law');
 define('DB_USER', 'law');

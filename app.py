@@ -65,4 +65,5 @@ def chat():
     return jsonify({'response': ai_response})
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    # For production, bind to 0.0.0.0 to accept connections from reverse proxy
+    app.run(debug=False, host='0.0.0.0', port=5000)

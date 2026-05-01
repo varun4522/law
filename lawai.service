@@ -1,0 +1,15 @@
+[Unit]
+Description=Law Connectors - Lexi AI Flask Backend
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/var/www/law
+Environment="PATH=/var/www/law/venv/bin"
+ExecStart=/var/www/law/venv/bin/python app.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
