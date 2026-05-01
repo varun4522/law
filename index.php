@@ -209,7 +209,7 @@
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 40px;
         }
 
@@ -616,6 +616,13 @@
                 max-width: 100%;
             }
 
+            @media (min-width: 769px) and (max-width: 1024px) {
+                .features-container {
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 24px;
+                }
+            }
+
             .feature-card {
                 padding: 24px 16px;
                 border-radius: 8px;
@@ -977,6 +984,12 @@
             <div class="feature-icon"><i class="fas fa-wallet"></i></div>
             <h3>Integrated Wallet</h3>
             <p>Manage payments securely with our integrated wallet system. Flexible payment options and instant refunds.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-star"></i></div>
+            <h3>Verified Experts</h3>
+            <p>All advocates are verified legal professionals with proven experience. Read ratings and reviews from real clients to choose the best match.</p>
         </div>
 
     </div>
