@@ -1,12 +1,22 @@
 import os
 from flask import Flask, render_template, request, jsonify
+from flask_cors import CORS
 from openai import OpenAI
 from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates', static_folder='static')
+
+# Enable CORS for all routes (required for iframe embedding)
+CORS(app, resources={
+    r"/*": {
+        "origins": ["*"],
+        "methods": ["GET", "POST", "OPTIONS"],
+        "allow_headers": ["Content-Type"]
+    }
+})
 
 # System prompt to instruct the AI
 SYSTEM_PROMPT = """
@@ -52,18 +62,38 @@ def get_ai_response(user_prompt):
 def index():
     return render_template('index.html')
 
-@app.route('/chat', methods=['POST'])
+@app.route('/api', defaults={'path': ''})
+@app.route('/api/<path:path>')
+def api_route(path):
+    """Handle API requests - default to index for iframe"""
+    if path == '' or path == '/':
+        return render_template('index.html')
+    return render_template('index.html')
+
+@app.route('/chat', methods=['POST', 'OPTIONS'])
 def chat():
-    data = request.json
-    user_message = data.get('message', '')
+    """Handle chat messages"""
+    if request.method == 'OPTIONS':
+        return '', 200
     
-    if not user_message:
-        return jsonify({'error': 'Message is required'}), 400
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({'error': 'No JSON data provided'}), 400
+            
+        user_message = data.get('message', '').strip()
         
-    ai_response = get_ai_response(user_message)
-    
-    return jsonify({'response': ai_response})
+        if not user_message:
+            return jsonify({'error': 'Message is required'}), 400
+            
+        ai_response = get_ai_response(user_message)
+        
+        return jsonify({'response': ai_response})
+    except Exception as e:
+        print(f"Error in chat route: {e}")
+        return jsonify({'error': 'Internal server error'}), 500
 
 if __name__ == '__main__':
     # For production, bind to 0.0.0.0 to accept connections from reverse proxy
-    app.run(debug=False, host='0.0.0.0', port=5000)
+    app.run(debug=False, host='0.0.0.0', port=5000, threaded=True)
+

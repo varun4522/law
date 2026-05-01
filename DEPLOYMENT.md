@@ -3,7 +3,7 @@
 ## 📋 Prerequisites
 - Linux server (Ubuntu 20.04 LTS or later recommended)
 - Node.js / PHP support for web files
-- Nginx or Apache web server
+- Apache web server with mod_proxy enabled
 - Python 3.8+
 - SSH access to server
 
@@ -41,22 +41,31 @@ nano .env
 OPENROUTER_API_KEY=your_actual_key_here
 ```
 
-### 5. Setup Nginx Reverse Proxy
+### 5. Setup Apache Reverse Proxy
 ```bash
-# Copy Nginx configuration
-sudo cp nginx-config.conf /etc/nginx/sites-available/law-connectors
+# Enable required Apache modules
+sudo a2enmod proxy
+sudo a2enmod proxy_http
+sudo a2enmod rewrite
+sudo a2enmod ssl
+
+# Copy Apache configuration
+sudo cp apache-config.conf /etc/apache2/sites-available/law-connectors.conf
 
 # Edit and update SSL certificate paths
-sudo nano /etc/nginx/sites-available/law-connectors
+sudo nano /etc/apache2/sites-available/law-connectors.conf
+# Update: SSLCertificateFile and SSLCertificateKeyFile with your paths
 
-# Enable the site
-sudo ln -s /etc/nginx/sites-available/law-connectors /etc/nginx/sites-enabled/
+# Disable default site and enable law-connectors
+sudo a2dissite 000-default.conf
+sudo a2ensite law-connectors.conf
 
-# Test Nginx config
-sudo nginx -t
+# Test Apache config
+sudo apache2ctl configtest
+# Should output: Syntax OK
 
-# Restart Nginx
-sudo systemctl restart nginx
+# Restart Apache
+sudo systemctl restart apache2
 ```
 
 ### 6. Setup Systemd Service for Flask Auto-Start
@@ -159,19 +168,23 @@ sudo systemctl stop law-connectors
 sudo journalctl -u law-connectors -n 20
 # Check Python version
 python3 --version
+# Check if port 5000 is in use
+sudo ss -tulpn | grep 5000
 ```
 
-### API returns 502 Bad Gateway
+### API returns 404 Not Found
 - Check if Flask is running: `sudo systemctl status law-connectors`
-- Check Nginx logs: `sudo tail -f /var/log/nginx/error.log`
+- Check Apache logs: `sudo tail -f /var/log/apache2/law-error.log`
+- Check Flask port: `curl http://127.0.0.1:5000/`
 
 ### Database connection fails
 - Verify 72.61.170.123 is accessible: `ping 72.61.170.123`
 - Check credentials in .env
 
 ### Reverse proxy not working
-- Test Nginx syntax: `sudo nginx -t`
-- Check Nginx logs: `sudo tail -f /var/log/nginx/access.log`
+- Test Apache syntax: `sudo apache2ctl configtest`
+- Check Apache modules: `sudo apache2ctl -M | grep proxy`
+- Check Apache logs: `sudo tail -f /var/log/apache2/law-error.log`
 
 ## 📝 Key Changes Made
 
@@ -179,8 +192,60 @@ python3 --version
 2. **app.py**: Changed binding from `localhost` → `0.0.0.0` and debug mode off
 3. **lib/db.php**: Changed DB_HOST from `localhost` → `72.61.170.123`
 4. Created **lawai.service** for systemd auto-start
-5. Created **nginx-config.conf** for reverse proxy setup
+5. Created **apache-config.conf** for Apache reverse proxy setup
 6. Created **.env.example** for environment variables
 
-## 🎉 Done!
-Your Law Connectors app is now ready to run on your live server at `https://test.1xclube.org`
+## ⚡ Quick Deployment Commands (SSH)
+
+Copy and paste these commands in order to deploy:
+
+```bash
+# 1. Connect to your server
+ssh user@72.61.170.123
+
+# 2. Create web directory
+sudo mkdir -p /var/www/law
+cd /var/www/law
+
+# 3. Upload files (from your local machine)
+# Ctrl+D to exit SSH, then:
+scp -r /path/to/law/* user@72.61.170.123:/var/www/law/
+
+# 4. Back in SSH:
+cd /var/www/law
+
+# 5. Set permissions
+sudo chown -R www-data:www-data /var/www/law
+sudo chmod -R 755 /var/www/law
+
+# 6. Setup Python environment
+python3 -m venv venv
+source venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
+
+# 7. Create .env file
+cp .env.example .env
+nano .env
+# Edit and add your OPENROUTER_API_KEY
+
+# 8. Setup systemd service
+sudo cp lawai.service /etc/systemd/system/law-connectors.service
+sudo systemctl daemon-reload
+sudo systemctl enable law-connectors
+sudo systemctl start law-connectors
+
+# 9. Setup Apache
+sudo a2enmod proxy proxy_http rewrite ssl
+sudo cp apache-config.conf /etc/apache2/sites-available/law-connectors.conf
+sudo nano /etc/apache2/sites-available/law-connectors.conf
+# Update SSL certificate paths
+sudo a2dissite 000-default.conf
+sudo a2ensite law-connectors.conf
+sudo apache2ctl configtest
+sudo systemctl restart apache2
+
+# 10. Verify everything is working
+sudo systemctl status law-connectors
+curl http://127.0.0.1:5000/
+```

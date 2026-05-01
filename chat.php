@@ -174,7 +174,18 @@
 
 <!-- Chatbot Iframe -->
 <div class="chat-container">
-    <iframe src="https://test.1xclube.org/api" title="Lexi AI Legal Assistant"></iframe>
+    <?php
+        // Detect if running on live server or localhost
+        $host = $_SERVER['HTTP_HOST'];
+        $is_local = strpos($host, 'localhost') !== false || strpos($host, '127.0.0.1') !== false;
+        
+        if ($is_local) {
+            $api_url = 'http://127.0.0.1:5000/';
+        } else {
+            $api_url = 'https://' . $host . '/api';
+        }
+    ?>
+    <iframe src="<?php echo $api_url; ?>" title="Lexi AI Legal Assistant"></iframe>
 </div>
 
 </body>
